@@ -115,6 +115,7 @@
     pkgs.gtop
     pkgs.nixd
     pkgs.nil
+    pkgs.kitty
   ];
 
   programs.git.enable = true;
