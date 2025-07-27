@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports =
@@ -17,12 +17,11 @@
   # networking.hostName = "nixos"; # Define your hostname
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-  #   "discord"
-  # ];
+  nixpkgs.config.allowUnfreePredicate = (pkg: builtins.elem (lib.getName pkg) [
+    "discord"
+  ]);
 
-
-  nixpkgs.config.allowUnfree = true;
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -49,12 +48,40 @@
     LC_TIME = "en_IE.UTF-8";
   };
 
-  # Enable the X11 windowing system.
+  i18n.inputMethod = {
+    type = "ibus";
+    ibus.engines = with pkgs.ibus-engines; [ mozc ];
+  };
+
+  # Enable the X11 windowing system (but also Wayland? See https://github.com/NixOS/nixpkgs/issues/94799)
   services.xserver.enable = true;
 
-  # Enable the Budgie Desktop environment.
+  # The "displayManager" refers to the lockscreen. Alternatives to lightdm are available.
   services.xserver.displayManager.lightdm.enable = true;
+  # It seems like it is the desktop manager which decides for itself whether to use X11 or Wayland.
+  # There is no Nix configuration like "servies.wayland.enable", and the existing "services.xserver.enable"
+  #  does not necessarily mean that we will be using X11 (again, that is up to the desktop environmemt).
+  # Budgie (currently on version 10.9) does NOT support Wayland.
+  # Version 10.10 (currently in development) will ONLY support Wayland.
+  #
+  # `Sway` seems to be like another desktop manager, but one that DOES use Wayland, though described as a
+  #  "window manager", which basically makes it a minimal desktop environment primarily navigated with keyboard shortcuts.
+  # Sway can be enabled relatively easily in NixOS by using `programs.sway.enable`.
+  # It seems possible to also do a "build-your-own-DE" instead of using something like Budgie, or KDE Plasma. You could have
+  #  "Sway"/"Hyprland" to composite application windows, "waybar" to have a taskbar, "anyrun" for an application launcher,
+  #  something else for notifications, something for widgets, etc. etc.
+  # There is a repository of software that supports Wayland that can be used in constructin the desktop experience:
+  #  https://github.com/rcalixte/awesome-wayland
+  # There is also a useful tutorial (and blogger in general) for creating a Wayland NixOS desktop using Sway here:
+  #  https://www.drakerossman.com/blog/wayland-on-nixos-confusion-conquest-triumph#getting-more-stuff-for-sway
+  # For the question of why some categories software need/want a "Wayland-specific" implementation, refer to this Claude conversation:
+  #  https://claude.ai/share/326a6e03-8145-44d5-b79b-21bcafbce0e9
   services.xserver.desktopManager.budgie.enable = true;
+
+  environment.budgie.excludePackages = [
+    pkgs.mate-terminal
+    pkgs.xterm
+  ];
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -92,7 +119,7 @@
     isNormalUser = true;
     description = "Martin Molnar";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
+    packages = [
     #  thunderbird
     ];
   };
@@ -106,7 +133,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
     pkgs.zed-editor-fhs
@@ -114,7 +141,6 @@
     pkgs.hydralauncher
     pkgs.gtop
     pkgs.nixd
-    pkgs.nil
     pkgs.kitty
   ];
 
