@@ -4,11 +4,19 @@
 
 { config, pkgs, lib, ... }:
 
-{
+let
+  hostname = "dm01";
+in {
+  networking.hostName = hostname;
   imports =
     [ # Include the results of the hardware scan.
-      /etc/nixos/hardware-configuration.nix
+      ./hardware-configuration.nix
     ];
+
+  programs.nh = {
+    enable = true;
+    flake = ./flake.nix;
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -134,15 +142,14 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+  environment.systemPackages = with pkgs; [
   #  wget
-    pkgs.zed-editor-fhs
-    pkgs.discord
-    pkgs.gtop
-    pkgs.nixd
-    pkgs.kitty
-    pkgs.spotify
+    zed-editor-fhs
+    discord
+    gtop
+    nixd
+    kitty
+    spotify
   ];
 
   programs.git.enable = true;
