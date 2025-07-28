@@ -19,6 +19,7 @@
 
   nixpkgs.config.allowUnfreePredicate = (pkg: builtins.elem (lib.getName pkg) [
     "discord"
+    "spotify"
   ]);
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -79,9 +80,9 @@
   services.xserver.desktopManager.budgie.enable = true;
 
   environment.budgie.excludePackages = [
-    pkgs.mate-terminal
-    pkgs.xterm
+    pkgs.gnome-terminal
   ];
+  services.xserver.excludePackages = [ pkgs.xterm ];
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -138,10 +139,10 @@
   #  wget
     pkgs.zed-editor-fhs
     pkgs.discord
-    pkgs.hydralauncher
     pkgs.gtop
     pkgs.nixd
     pkgs.kitty
+    pkgs.spotify
   ];
 
   programs.git.enable = true;
