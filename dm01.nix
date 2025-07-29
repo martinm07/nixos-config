@@ -63,6 +63,23 @@ in {
     ibus.engines = with pkgs.ibus-engines; [ mozc ];
   };
 
+  fonts = {
+    enableDefaultPackages = true;
+    packages = with pkgs; [
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      ubuntu_font_family
+    ];
+
+    fontconfig = {
+      defaultFonts = {
+        sansSerif = [ "Noto Sans CJK" ];
+        serif = [ "Noto Serif CJK" ];
+        monospace = [ "Ubuntu Mono" ];
+      };
+    };
+  };
+
   # Enable the X11 windowing system (but also Wayland? See https://github.com/NixOS/nixpkgs/issues/94799)
   services.xserver.enable = true;
 
@@ -94,13 +111,13 @@ in {
   services.xserver.excludePackages = [ pkgs.xterm ];
 
   # Configure keymap in X11
-  # services.xserver.xkb = {
-  #   layout = "gb";
-  #   variant = "extd";
-  # };
+  services.xserver.xkb = {
+    layout = "gb";
+    variant = "extd";
+  };
 
   # Configure console keymap
-  # console.keyMap = "uk";
+  console.keyMap = "uk";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
