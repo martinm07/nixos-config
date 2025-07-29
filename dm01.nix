@@ -69,6 +69,7 @@ in {
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
       ubuntu_font_family
+      fira-code
     ];
 
     fontconfig = {
