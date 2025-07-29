@@ -176,6 +176,15 @@ in {
     kitty
     zed-editor-fhs
     nixd # Nix LSP
+    (python313.withPackages (
+      ps: with ps; [
+        flask
+        flask_wtf
+        wtforms
+        twilio
+        regex
+      ]
+    ))
 
     # --- --- --- --- ---
     # --- CASUAL APPS ---
