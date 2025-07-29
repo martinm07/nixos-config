@@ -15,7 +15,7 @@ in {
 
   programs.nh = {
     enable = true;
-    flake = ./flake.nix;
+    flake = "/home/martinm/.config/system";
   };
 
   # Bootloader.
