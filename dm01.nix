@@ -94,13 +94,13 @@ in {
   services.xserver.excludePackages = [ pkgs.xterm ];
 
   # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "gb";
-    variant = "extd";
-  };
+  # services.xserver.xkb = {
+  #   layout = "gb";
+  #   variant = "extd";
+  # };
 
   # Configure console keymap
-  console.keyMap = "uk";
+  # console.keyMap = "uk";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
