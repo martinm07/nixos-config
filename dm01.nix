@@ -58,6 +58,7 @@ in {
   };
 
   i18n.inputMethod = {
+    enable = true;
     type = "ibus";
     ibus.engines = with pkgs.ibus-engines; [ mozc ];
   };
@@ -143,12 +144,26 @@ in {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  wget
-    zed-editor-fhs
-    discord
+    # --- --- --- -- --- --- ---
+    # --- COMMAND LINE TOOLS ---
+    # --- --- --- -- --- --- ---
+    wget
     gtop
-    nixd
+    eza # A Rust alternative to ls/tree. Output uses colours (based on a theme) to include extra information.
+    #     For info on the default theme:   https://github.com/eza-community/eza/blob/main/docs/theme.yml
+
+    # --- --- --- --- --- ---
+    # --- DEVELOPER TOOLS ---
+    # --- --- --- --- --- ---
     kitty
+    zed-editor-fhs
+    nixd # Nix LSP
+
+    # --- --- --- --- ---
+    # --- CASUAL APPS ---
+    # --- --- --- --- ---
+    discord
+    element-desktop
     spotify
   ];
 
