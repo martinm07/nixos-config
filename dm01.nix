@@ -128,8 +128,8 @@ in {
     isNormalUser = true;
     description = "Martin Molnar";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = [
-    #  thunderbird
+    packages = with pkgs; [
+     thunderbird
     ];
   };
 
