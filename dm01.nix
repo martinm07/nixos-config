@@ -28,6 +28,8 @@ in {
   nixpkgs.config.allowUnfreePredicate = (pkg: builtins.elem (lib.getName pkg) [
     "discord"
     "spotify"
+    "steam"
+    "steam-unwrapped"
   ]);
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -187,6 +189,16 @@ in {
       ]
     ))
 
+    # --- --- --- --
+    # --- GAMING ---
+    # --- --- --- --
+
+    steam-run
+    mangohud # Provides a small HUD on games for monitoring FPS, system resources, etc.
+    protonup # Provides a CLI command `protonup` which installs the latest version of Proton GE
+    lutris
+    heroic
+
     # --- --- --- --- ---
     # --- CASUAL APPS ---
     # --- --- --- --- ---
@@ -194,6 +206,26 @@ in {
     element-desktop
     spotify
   ];
+
+  programs.steam = {
+    enable = true;
+    # Runs games in an "optimized micro compositor" which MAY help for games that have problems upscaling/my specific resolution
+    #  REMEMBER compositors from the X11/Wayland research? They tell applications what part of the screen to render and "composes" them all
+    #  together into one video output with windows into all the different applications currently running (Hyprland is a compositor, so is Sway).
+    gamescopeSession.enable = true;
+  };
+  programs.gamemode.enable = true;
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+  services.xserver.videoDrivers = [ "amdgpu" ];
+
+  environment.sessionVariables = {
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS =
+    "\${HOME}/.steam/root/compatibilitytools.d";
+  };
 
   programs.git.enable = true;
   programs.git.config = {
