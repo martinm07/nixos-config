@@ -1,17 +1,19 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, lib, ... }:
-
-let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   hostname = "dm01";
 in {
   networking.hostName = hostname;
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   programs.nh = {
     enable = true;
@@ -25,14 +27,15 @@ in {
   # networking.hostName = "nixos"; # Define your hostname
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  nixpkgs.config.allowUnfreePredicate = (pkg: builtins.elem (lib.getName pkg) [
-    "discord"
-    "spotify"
-    "steam"
-    "steam-unwrapped"
-  ]);
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "discord"
+      "spotify"
+      "steam"
+      "steam-unwrapped"
+    ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -62,7 +65,7 @@ in {
   i18n.inputMethod = {
     enable = true;
     type = "ibus";
-    ibus.engines = with pkgs.ibus-engines; [ mozc ];
+    ibus.engines = with pkgs.ibus-engines; [mozc];
   };
 
   fonts = {
@@ -76,9 +79,9 @@ in {
 
     fontconfig = {
       defaultFonts = {
-        sansSerif = [ "Noto Sans CJK" ];
-        serif = [ "Noto Serif CJK" ];
-        monospace = [ "Ubuntu Mono" ];
+        sansSerif = ["Noto Sans CJK"];
+        serif = ["Noto Serif CJK"];
+        monospace = ["Ubuntu Mono"];
       };
     };
   };
@@ -111,7 +114,7 @@ in {
   environment.budgie.excludePackages = [
     pkgs.gnome-terminal
   ];
-  services.xserver.excludePackages = [ pkgs.xterm ];
+  services.xserver.excludePackages = [pkgs.xterm];
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -148,9 +151,9 @@ in {
   users.users.martinm = {
     isNormalUser = true;
     description = "Martin Molnar";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
-     thunderbird
+      thunderbird
     ];
   };
 
@@ -181,13 +184,14 @@ in {
     nixd # Nix LSP
     alejandra # Nix formatter
     (python313.withPackages (
-      ps: with ps; [
-        flask
-        flask_wtf
-        wtforms
-        twilio
-        regex
-      ]
+      ps:
+        with ps; [
+          flask
+          flask_wtf
+          wtforms
+          twilio
+          regex
+        ]
     ))
 
     # --- --- --- --
@@ -221,11 +225,10 @@ in {
     enable = true;
     enable32Bit = true;
   };
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  services.xserver.videoDrivers = ["amdgpu"];
 
   environment.sessionVariables = {
-    STEAM_EXTRA_COMPAT_TOOLS_PATHS =
-    "\${HOME}/.steam/root/compatibilitytools.d";
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
   };
 
   programs.git.enable = true;
@@ -260,5 +263,4 @@ in {
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
-
 }
