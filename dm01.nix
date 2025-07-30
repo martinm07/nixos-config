@@ -177,7 +177,7 @@ in {
     # --- DEVELOPER TOOLS ---
     # --- --- --- --- --- ---
     kitty
-    zed-editor-fhs
+    zed-editor
     nixd # Nix LSP
     (python313.withPackages (
       ps: with ps; [
