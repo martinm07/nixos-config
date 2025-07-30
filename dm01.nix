@@ -165,8 +165,13 @@ in {
   };
 
   # Enable automatic login for the user.
-  services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "martinm";
+  # With automatic login, the first application you open triggers polkit to ask for the password
+  # If you provide the password in the display manager the keyring is automatically unlocked
+  # And even with autoLogin enabled, the display manager still exists and will ask for a password after
+  #  inactivity, turning on the system, etc.
+  # https://askubuntu.com/questions/1376042/at-startup-access-to-the-default-keyring-is-required-by-an-application
+  services.displayManager.autoLogin.enable = false;
+  # services.displayManager.autoLogin.user = "martinm";
 
   # Install firefox.
   programs.firefox.enable = true;
