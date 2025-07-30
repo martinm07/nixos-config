@@ -158,6 +158,11 @@ in {
     shell = pkgs.zsh;
   };
   programs.zsh.enable = true;
+  programs.zsh.ohMyZsh = {
+    enable = true;
+    # plugins = [];
+    customPkgs = with pkgs; [zsh-fzf-tab];
+  };
 
   # Enable automatic login for the user.
   services.displayManager.autoLogin.enable = true;
