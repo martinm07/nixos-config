@@ -169,6 +169,7 @@ in {
     gtop
     eza # A Rust alternative to ls/tree. Output uses colours (based on a theme) to include extra information.
     #     For info on the default theme:   https://github.com/eza-community/eza/blob/main/docs/theme.yml
+    xorg.xmodmap
 
     # --- --- --- --- --- ---
     # --- DEVELOPER TOOLS ---
