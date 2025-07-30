@@ -179,6 +179,7 @@ in {
     kitty
     zed-editor
     nixd # Nix LSP
+    alejandra # Nix formatter
     (python313.withPackages (
       ps: with ps; [
         flask
