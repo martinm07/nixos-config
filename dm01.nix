@@ -223,12 +223,13 @@ in {
     # --- --- --- --
     # --- GAMING ---
     # --- --- --- --
-
+    hydralauncher
     steam-run
     mangohud # Provides a small HUD on games for monitoring FPS, system resources, etc.
     protonup # Provides a CLI command `protonup` which installs the latest version of Proton GE
     lutris
     heroic
+    nvtopPackages.amd # For monitoring GPU utilisation
 
     # --- --- --- --- ---
     # --- CASUAL APPS ---
