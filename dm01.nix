@@ -5,10 +5,14 @@
   config,
   pkgs,
   lib,
+  # self,
   ...
 }: let
   hostname = "dm01";
+  # src = builtins.getFlake self;
 in {
+  # system.configurationRevision = src.rev;
+  # system.nixos.label = "commit: ${self.sourceInfo.shortRev}";
   networking.hostName = hostname;
   imports = [
     # Include the results of the hardware scan.
@@ -21,8 +25,12 @@ in {
   };
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # boot.loader.systemd-boot.enable = true;
+  # boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub.enable = true;
+  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.useOSProber = true;
+  boot.loader.grub.configurationLimit = 120;
 
   # networking.hostName = "nixos"; # Define your hostname
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -62,6 +70,11 @@ in {
     LC_TIME = "en_IE.UTF-8";
   };
 
+  # NOTE: There is additional config in ~/.Xmodmap, for mapping Caps lock to "Eisu toggle" on Japanese keyboard
+  #  (essentially, just getting alphanumeric lettering, katakana is achieved by holding Shift)
+  #  and for mapping the backtick from a "dead_grave" to a "grave" (so that I only have to press it once to type)
+  # Where the backtick mapping comes from: https://gist.github.com/keckelt/0ba90f8840e2903bfdc54c7e19ad4613
+  # More info on keyboard keycode mapping with xmodmap: https://chatgpt.com/share/688a93b8-7dbc-8002-94f0-1840096aab22
   i18n.inputMethod = {
     enable = true;
     type = "ibus";
@@ -187,6 +200,25 @@ in {
     eza # A Rust alternative to ls/tree. Output uses colours (based on a theme) to include extra information.
     #     For info on the default theme:   https://github.com/eza-community/eza/blob/main/docs/theme.yml
     xorg.xmodmap
+    (writeShellScriptBin "nh-os-switch" ''
+      set -e
+
+      # Get git information
+      COMMIT_HASH=$(${git}/bin/git rev-parse --short HEAD 2>/dev/null || echo "unknown")
+      COMMIT_MSG=$(${git}/bin/git log -1 --pretty=format:"%s" 2>/dev/null || echo "no-git-info")
+
+      # Truncate message if too long (bootloader has limited space)
+      if [ ''${#COMMIT_MSG} -gt 50 ]; then
+          COMMIT_MSG="''${COMMIT_MSG:0:47}..."
+      fi
+
+      LABEL="''${COMMIT_HASH}: ''${COMMIT_MSG}"
+
+      echo "Building with label: $LABEL"
+
+      # Use nh with the custom label
+      ${nh}/bin/nh os switch --option system.nixos.label "$LABEL" "$@"
+    '')
 
     # --- --- --- --- --- ---
     # --- DEVELOPER TOOLS ---

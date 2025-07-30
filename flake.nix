@@ -9,12 +9,17 @@
   outputs = {
     self,
     nixpkgs,
+    ...
   }: let
     hostname = "dm01";
   in {
     nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+      # specialArgs = {inherit inputs;};
       modules = [
+        {
+          system.configurationRevision = self.rev or self.dirtyRev or null;
+        }
         # Import the previous configuration.nix we used,
         # so the old configuration file still takes effect
         ./${hostname}.nix
