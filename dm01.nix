@@ -55,7 +55,6 @@ in {
       "spotify"
       "steam"
       "steam-unwrapped"
-      "youtube-music"
     ];
 
   # system.nixos.label = "test-label";
