@@ -27,10 +27,24 @@ in {
   # Bootloader.
   # boot.loader.systemd-boot.enable = true;
   # boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub.enable = true;
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.useOSProber = true;
-  boot.loader.grub.configurationLimit = 120;
+  boot.loader = {
+    grub = {
+      enable = true;
+      efiSupport = true;
+      useOSProber = true;
+      configurationLimit = 120;
+      device = "nodev";
+    };
+    efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot";
+    };
+  };
+  # boot.loader.grub.enable = true;
+  # boot.loader.grub.efiSupport = true;
+  # boot.loader.grub.useOSProber = true;
+  # boot.loader.grub.configurationLimit = 120;
+  # boot.loader.grub.device = "/dev/disk/by-uuid/8EA7-EE0A";
 
   # networking.hostName = "nixos"; # Define your hostname
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -216,8 +230,14 @@ in {
 
       echo "Building with label: $LABEL"
 
-      # Use nh with the custom label
-      ${nh}/bin/nh os switch --option system.nixos.label "$LABEL" "$@"
+      # Check if user already provided -- separator
+      if [[ " $* " == *" -- "* ]]; then
+          # User provided --, append our option to their extra args
+          ${nh}/bin/nh os switch "$@" --option system.nixos.label "$LABEL"
+      else
+          # No -- from user, add our own
+          ${nh}/bin/nh os switch "$@" -- --option system.nixos.label "$LABEL"
+      fi
     '')
 
     # --- --- --- --- --- ---
