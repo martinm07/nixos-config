@@ -58,6 +58,7 @@ in {
       "youtube-music"
     ];
 
+  system.nixos.label = "test-label";
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Configure network proxy if necessary
