@@ -55,6 +55,7 @@ in {
       "spotify"
       "steam"
       "steam-unwrapped"
+      "youtube-music"
     ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
