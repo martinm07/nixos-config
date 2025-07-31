@@ -216,7 +216,7 @@ in {
     #     For info on the default theme:   https://github.com/eza-community/eza/blob/main/docs/theme.yml
     xorg.xmodmap
     (writeShellScriptBin "nh-os-switch" ''
-      set -e
+      set -euo pipefail
 
       # Get git information
       COMMIT_HASH=$(${git}/bin/git rev-parse --short HEAD 2>/dev/null || echo "unknown")
@@ -227,11 +227,28 @@ in {
           COMMIT_MSG="''${COMMIT_MSG:0:47}..."
       fi
 
-      LABEL="''${COMMIT_HASH}: ''${COMMIT_MSG}"
+      # Build the raw label (hash + colon + space + message)
+      RAW_LABEL="''${COMMIT_HASH}_:_''${COMMIT_MSG}"
 
-      echo "Building with label: $LABEL"
+      # 1) Replace spaces with hyphens
+      # 2) Remove any character not in A–Za–z0–9 : _ . -
+      SANITIZED_LABEL=$(printf '%s' "$RAW_LABEL" \
+          | tr ' ' '-' \
+          | tr -cd 'A-Za-z0-9:_.-')
 
-      NIXOS_LABEL="$LABEL" nh os switch "$@"
+      echo "Building with label: $SANITIZED_LABEL"
+
+      # Export it for nixos-rebuild
+      export NIXOS_LABEL="$SANITIZED_LABEL"
+
+      # Check if user already provided -- separator
+      if [[ " $* " == *" -- "* ]]; then
+      #     # User provided --, append our option to their extra args
+          ${nh}/bin/nh os switch "$@" --impure
+      else
+      #     # No -- from user, add our own
+          ${nh}/bin/nh os switch "$@" -- --impure
+      fi
     '')
 
     # --- --- --- --- --- ---
