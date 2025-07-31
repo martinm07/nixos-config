@@ -230,14 +230,7 @@ in {
 
       echo "Building with label: $LABEL"
 
-      # Check if user already provided -- separator
-      if [[ " $* " == *" -- "* ]]; then
-          # User provided --, append our option to their extra args
-          ${nh}/bin/nh os switch "$@" --option system.nixos.label "$LABEL"
-      else
-          # No -- from user, add our own
-          ${nh}/bin/nh os switch "$@" -- --option system.nixos.label "$LABEL"
-      fi
+      NIXOS_LABEL="$LABEL" nh os switch "$@"
     '')
 
     # --- --- --- --- --- ---
