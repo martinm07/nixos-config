@@ -296,6 +296,7 @@ in {
     heroic
     nvtopPackages.amd # For monitoring GPU utilisation
     fragments
+    qbittorrent
 
     # --- --- --- --- ---
     # --- CASUAL APPS ---
