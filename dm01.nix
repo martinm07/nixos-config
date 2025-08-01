@@ -283,6 +283,7 @@ in {
           regex
         ]
     ))
+    baobab
 
     # --- --- --- --
     # --- GAMING ---
