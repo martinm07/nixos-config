@@ -201,8 +201,9 @@ in {
   services.displayManager.autoLogin.enable = false;
   # services.displayManager.autoLogin.user = "martinm";
 
-  # Install firefox.
   programs.firefox.enable = true;
+
+  services.flatpak.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -293,6 +294,7 @@ in {
     lutris
     heroic
     nvtopPackages.amd # For monitoring GPU utilisation
+    fragments
 
     # --- --- --- --- ---
     # --- CASUAL APPS ---
