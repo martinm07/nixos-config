@@ -294,6 +294,7 @@ in {
     protonup # Provides a CLI command `protonup` which installs the latest version of Proton GE
     lutris
     heroic
+    prismlauncher
     nvtopPackages.amd # For monitoring GPU utilisation
     qbittorrent
     wineWowPackages.stable # support both 32-bit and 64-bit applications
