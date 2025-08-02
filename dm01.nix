@@ -55,7 +55,6 @@ in {
       "spotify"
       "steam"
       "steam-unwrapped"
-      "optifine"
     ];
 
   # system.nixos.label = "test-label";
@@ -86,16 +85,24 @@ in {
     LC_TIME = "en_IE.UTF-8";
   };
 
-  # NOTE: There is additional config in ~/.Xmodmap, for mapping Caps lock to "Eisu toggle" on Japanese keyboard
-  #  (essentially, just getting alphanumeric lettering, katakana is achieved by holding Shift)
-  #  and for mapping the backtick from a "dead_grave" to a "grave" (so that I only have to press it once to type)
-  # Where the backtick mapping comes from: https://gist.github.com/keckelt/0ba90f8840e2903bfdc54c7e19ad4613
-  # More info on keyboard keycode mapping with xmodmap: https://chatgpt.com/share/688a93b8-7dbc-8002-94f0-1840096aab22
   i18n.inputMethod = {
     enable = true;
     type = "ibus";
     ibus.engines = with pkgs.ibus-engines; [mozc];
   };
+
+  # This is additional config, for mapping CapsLock to "Eisu toggle" on the Japanese keyboard
+  #  (essentially, just getting alphanumeric lettering; katakana is achieved by holding Shift)
+  # And separately for mapping the backtick from a "dead_grave" to a "grave"
+  #  (so that I only have to press it once to type)
+  # Where the backtick mapping comes from: https://gist.github.com/keckelt/0ba90f8840e2903bfdc54c7e19ad4613
+  # More info on keyboard keycode mapping with xmodmap: https://chatgpt.com/share/688a93b8-7dbc-8002-94f0-1840096aab22
+  # This is supposed to run on startup. Taken from here: https://nixos.wiki/wiki/Keyboard_Layout_Customization
+  services.xserver.displayManager.sessionCommands = ''sleep 5 && ${pkgs.xorg.xmodmap}/bin/xmodmap ${pkgs.writeText "keymap-mod" ''
+      keycode 66 = Eisu_toggle Caps_Lock
+      keycode  49 = grave notsign dead_grave notsign brokenbar notsign brokenbar
+      clear Lock
+    ''}'';
 
   fonts = {
     enableDefaultPackages = true;
@@ -221,12 +228,12 @@ in {
       set -euo pipefail
 
       # Get git information
-      COMMIT_HASH=$(${git}/bin/git rev-parse --short HEAD 2>/dev/null || echo "unknown")
-      COMMIT_MSG=$(${git}/bin/git log -1 --pretty=format:"%s" 2>/dev/null || echo "no-git-info")
+      COMMIT_HASH=$(${git}/bin/git -C /home/martinm/.config/system rev-parse --short HEAD 2>/dev/null || echo "unknown")
+      COMMIT_MSG=$(${git}/bin/git -C /home/martinm/.config/system log -1 --pretty=format:"%s" 2>/dev/null || echo "no-git-info")
 
       # Truncate message if too long (bootloader has limited space)
       if [ ''${#COMMIT_MSG} -gt 50 ]; then
-          COMMIT_MSG="''${COMMIT_MSG:0:47}..."
+        COMMIT_MSG="''${COMMIT_MSG:0:47}..."
       fi
 
       # Build the raw label (hash + colon + space + message)
@@ -235,8 +242,8 @@ in {
       # 1) Replace spaces with hyphens
       # 2) Remove any character not in A–Za–z0–9 : _ . -
       SANITIZED_LABEL=$(printf '%s' "$RAW_LABEL" \
-          | tr ' ' '-' \
-          | tr -cd 'A-Za-z0-9:_.-')
+        | tr ' ' '-' \
+        | tr -cd 'A-Za-z0-9:_.-')
 
       echo "Building with label: $SANITIZED_LABEL"
 
@@ -246,10 +253,10 @@ in {
       # Check if user already provided -- separator
       if [[ " $* " == *" -- "* ]]; then
       #     # User provided --, append our option to their extra args
-          ${nh}/bin/nh os switch "$@" --impure
+        ${nh}/bin/nh os switch "$@" --impure
       else
       #     # No -- from user, add our own
-          ${nh}/bin/nh os switch "$@" -- --impure
+        ${nh}/bin/nh os switch "$@" -- --impure
       fi
     '')
 
@@ -289,18 +296,20 @@ in {
     # --- --- --- --
     # --- GAMING ---
     # --- --- --- --
-    hydralauncher
-    steam-run
-    mangohud # Provides a small HUD on games for monitoring FPS, system resources, etc.
     protonup # Provides a CLI command `protonup` which installs the latest version of Proton GE
-    lutris
-    heroic
+    #          This is so that Steam can use Proton GE to launch games (instead of Valve's official Proton releases).
+    #          That is also the purpose of setting STEAM_EXTRA_COMPAT_TOOLS_PATHS in environment.sessionVariables later down
+    #           (so that on Steam it appears under [selected game] > Properties... > Compatibility)
+    #          TODO: Not necessary if using Heroic launcher as primary launcher for games...?
 
-    prismlauncher
-    optifine
+    hydralauncher # For getting download sources
+    lutris # TODO: Maybe useless? Have yet to find a use
+    heroic # Primary games launcher
+    prismlauncher # Minecraft launcher
 
+    mangohud # Provides a small HUD on games for monitoring FPS, system resources, etc.
     nvtopPackages.amd # For monitoring GPU utilisation
-    qbittorrent
+    qbittorrent # For managing torrents (I find it the nicest and most feauture-complete; especially of value being the ability to "Force recheck")
     wineWowPackages.stable # support both 32-bit and 64-bit applications
     winetricks # for installing missing DLLs and other configuration
 
