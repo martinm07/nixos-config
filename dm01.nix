@@ -294,6 +294,7 @@ in {
           regex
         ]
     ))
+    nodejs
     ruby
     baobab
 
