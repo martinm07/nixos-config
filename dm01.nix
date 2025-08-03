@@ -187,7 +187,7 @@ in {
   users.users.martinm = {
     isNormalUser = true;
     description = "Martin Molnar";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "docker"];
     packages = with pkgs; [
       thunderbird
     ];
@@ -212,6 +212,11 @@ in {
   programs.firefox.enable = true;
 
   services.flatpak.enable = true;
+  virtualisation.docker.enable = true;
+  services.mysql = {
+    enable = true;
+    package = pkgs.mysql84;
+  };
 
   # environment.pathsToLink = [ "/home/martinm/.local/share/gem/ruby" ];
   # environment.variables.PATH = ;
