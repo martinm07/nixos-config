@@ -326,6 +326,14 @@ in {
     wineWowPackages.stable # support both 32-bit and 64-bit applications
     winetricks # for installing missing DLLs and other configuration
 
+    ## Add these for FNA3D support:
+    # vulkan-tools
+    # vulkan-validation-layers
+    vulkan-loader
+    SDL2
+    libGL
+    # libGLU
+
     # --- --- --- --- ---
     # --- CASUAL APPS ---
     # --- --- --- --- ---
@@ -346,6 +354,13 @@ in {
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+    # It seems like while hardware.graphics.enable includes the RADV driver for 64-bit support,
+    #  hardware.graphics.enable32Bit doesn't do the same.
+    # This is to hopefully make `VK_ICD_FILENAMES=/run/opengl-driver-32/share/vulkan/icd.d/radeon_icd.i686.json vulkaninfo`
+    #  not return "ERROR: [Loader Message] Code 0 : vkCreateInstance: Found no drivers!"
+    extraPackages32 = with pkgs.pkgsi686Linux; [
+      mesa.drivers # This includes RADV for 32-bit
+    ];
   };
 
   # Add AMDVLK (AMD Open Source Driver for Vulkan) so that programs (like Celeste using FNA3D?) can choose which driver to use
