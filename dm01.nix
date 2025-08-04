@@ -350,13 +350,14 @@ in {
 
   # Add AMDVLK (AMD Open Source Driver for Vulkan) so that programs (like Celeste using FNA3D?) can choose which driver to use
   # https://nixos.wiki/wiki/AMD_GPU#Vulkan
-  hardware.graphics.extraPackages = with pkgs; [
-    amdvlk
-  ];
-  # For 32 bit applications
-  hardware.graphics.extraPackages32 = with pkgs; [
-    driversi686Linux.amdvlk
-  ];
+  # hardware.graphics.extraPackages = with pkgs; [
+  #   amdvlk
+  # ];
+  # # For 32 bit applications
+  # hardware.graphics.extraPackages32 = with pkgs; [
+  #   driversi686Linux.amdvlk
+  # ];
+
   boot.initrd.kernelModules = ["amdgpu"]; # Load the correct driver "right away"
   services.xserver.videoDrivers = ["amdgpu"];
 
