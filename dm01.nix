@@ -224,14 +224,17 @@ in {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    # --- --- --- -- --- --- ---
-    # --- COMMAND LINE TOOLS ---
-    # --- --- --- -- --- --- ---
+    # --- --- ---- --- ---
+    # --- SYSTEM TOOLS ---
+    # --- --- ---- --- ---
     wget
     gtop
     eza # A Rust alternative to ls/tree. Output uses colours (based on a theme) to include extra information.
     #     For info on the default theme:   https://github.com/eza-community/eza/blob/main/docs/theme.yml
     xorg.xmodmap
+    clinfo # Verifying that OpenCL is correctly set up
+    lact # GUI amdgpu controller
+
     (writeShellScriptBin "nh-os-switch" ''
       set -euo pipefail
 
@@ -344,7 +347,28 @@ in {
     enable = true;
     enable32Bit = true;
   };
+
+  # Add AMDVLK (AMD Open Source Driver for Vulkan) so that programs (like Celeste using FNA3D?) can choose which driver to use
+  # https://nixos.wiki/wiki/AMD_GPU#Vulkan
+  hardware.graphics.extraPackages = with pkgs; [
+    amdvlk
+  ];
+  # For 32 bit applications
+  hardware.graphics.extraPackages32 = with pkgs; [
+    driversi686Linux.amdvlk
+  ];
+  boot.initrd.kernelModules = ["amdgpu"]; # Load the correct driver "right away"
   services.xserver.videoDrivers = ["amdgpu"];
+
+  # Creating a symlink for the ROCm HIP libraries where most applications expect them
+  # https://nixos.wiki/wiki/AMD_GPU#HIP
+  systemd.tmpfiles.rules = [
+    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+  ];
+
+  # LACT is a GUI interface for controlling amdgpu
+  systemd.packages = with pkgs; [lact];
+  systemd.services.lactd.wantedBy = ["multi-user.target"]; # start the daemon on boot
 
   environment.sessionVariables = {
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
