@@ -234,6 +234,7 @@ in {
     xorg.xmodmap
     clinfo # Verifying that OpenCL is correctly set up
     lact # GUI amdgpu controller
+    vulkan-tools # Provides 'vulkaninfo' and 'vkcube' commands
 
     (writeShellScriptBin "nh-os-switch" ''
       set -euo pipefail
@@ -326,14 +327,6 @@ in {
     wineWowPackages.stable # support both 32-bit and 64-bit applications
     winetricks # for installing missing DLLs and other configuration
 
-    ## Add these for FNA3D support:
-    vulkan-tools
-    # vulkan-validation-layers
-    vulkan-loader
-    SDL2
-    libGL
-    # libGLU
-
     # --- --- --- --- ---
     # --- CASUAL APPS ---
     # --- --- --- --- ---
@@ -354,29 +347,7 @@ in {
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    # It seems like while hardware.graphics.enable includes the RADV driver for 64-bit support,
-    #  hardware.graphics.enable32Bit doesn't do the same.
-    # This is to hopefully make `VK_ICD_FILENAMES=/run/opengl-driver-32/share/vulkan/icd.d/radeon_icd.i686.json vulkaninfo`
-    #  not return "ERROR: [Loader Message] Code 0 : vkCreateInstance: Found no drivers!"
-    # INFACT not true, adding this didn't add anything to the system, and certainly didn't fix anything
-    # extraPackages32 = with pkgs.pkgsi686Linux; [
-    #   mesa.drivers # This includes RADV for 32-bit
-    # ];
   };
-
-  # LD_LIBRARY_PATH=/run/opengl-driver/lib:/run/opengl-driver-32/lib:$LD_LIBRARY_PATH
-  # VK_LAYER_PATH=/run/opengl-driver/share/vulkan/explicit_layer.d:/run/opengl-driver-32/share/vulkan/explicit_layer.d
-  # VK_ICD_FILENAMES=/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json:/run/opengl-driver-32/share/vulkan/icd.d/radeon_icd.i686.json
-
-  # Add AMDVLK (AMD Open Source Driver for Vulkan) so that programs (like Celeste using FNA3D?) can choose which driver to use
-  # https://nixos.wiki/wiki/AMD_GPU#Vulkan
-  hardware.graphics.extraPackages = with pkgs; [
-    amdvlk
-  ];
-  # For 32 bit applications
-  hardware.graphics.extraPackages32 = with pkgs; [
-    driversi686Linux.amdvlk
-  ];
 
   boot.initrd.kernelModules = ["amdgpu"]; # Load the correct driver "right away"
   services.xserver.videoDrivers = ["amdgpu"];
