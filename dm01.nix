@@ -161,8 +161,31 @@ in {
   # Configure console keymap
   console.keyMap = "uk";
 
-  # Enable CUPS to print documents.
+  # https://nixos.wiki/wiki/Printing
+  # Enable CUPS to print documents (NOTE: this allows printer management through http://localhost:631)
   services.printing.enable = true;
+  services.printing.drivers = with pkgs; [hplip];
+
+  # Allow printer discovery on local network
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
+  # hardware.printers = {
+  #   ensurePrinters = [
+  #     {
+  #       name = "";
+  #       location = "Home";
+  #       deviceUri = "usb://Dell/1250c%20Color%20Printer?serial=YNP023240";
+  #       model = "Dell-1250c.ppd.gz";
+  #       ppdOptions = {
+  #         PageSize = "A4";
+  #       };
+  #     }
+  #   ];
+  # };
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
