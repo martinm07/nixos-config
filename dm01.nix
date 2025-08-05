@@ -55,6 +55,7 @@ in {
       "spotify"
       "steam"
       "steam-unwrapped"
+      "hplip"
     ];
 
   # system.nixos.label = "test-label";
@@ -166,6 +167,14 @@ in {
   services.printing.enable = true;
   services.printing.drivers = with pkgs; [hplip];
 
+  # https://nixos.wiki/wiki/Scanners
+  hardware.sane.enable = true;
+  # "sane-airscan" is for "driverless" scanning
+  hardware.sane.extraBackends = [pkgs.hplipWithPlugin pkgs.sane-airscan];
+
+  # For scanner discovery by other programs; udev assigns "predictable names" to network interfaces
+  services.udev.packages = [pkgs.sane-airscan];
+
   # Allow printer discovery on local network
   services.avahi = {
     enable = true;
@@ -210,7 +219,8 @@ in {
   users.users.martinm = {
     isNormalUser = true;
     description = "Martin Molnar";
-    extraGroups = ["networkmanager" "wheel" "docker"];
+    # "lp" is a group for "scanner printers" (i.e. all-in-one printers) I believe
+    extraGroups = ["networkmanager" "wheel" "docker" "scanner" "lp"];
     packages = with pkgs; [
       thunderbird
     ];
@@ -356,6 +366,7 @@ in {
     discord
     element-desktop
     spotify
+    simple-scan
   ];
 
   programs.steam = {
