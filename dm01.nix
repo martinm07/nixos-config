@@ -182,19 +182,19 @@ in {
     openFirewall = true;
   };
 
-  # hardware.printers = {
-  #   ensurePrinters = [
-  #     {
-  #       name = "";
-  #       location = "Home";
-  #       deviceUri = "usb://Dell/1250c%20Color%20Printer?serial=YNP023240";
-  #       model = "Dell-1250c.ppd.gz";
-  #       ppdOptions = {
-  #         PageSize = "A4";
-  #       };
-  #     }
-  #   ];
-  # };
+  hardware.printers = {
+    ensurePrinters = [
+      {
+        name = "OfficeJet_Pro_7740";
+        location = "Home";
+        deviceUri = "dnssd://HP%20OfficeJet%20Pro%207740%20series%20%5BB8A5A1%5D._ipp._tcp.local/?uuid=2f27ae69-f91d-7a3d-c8a2-30f36d15e09b";
+        model = "drv:///hp/hpcups.drv/hp-officejet_pro_7740_series.ppd";
+        ppdOptions = {
+          PageSize = "A4";
+        };
+      }
+    ];
+  };
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -367,6 +367,7 @@ in {
     element-desktop
     spotify
     simple-scan
+    naps2
   ];
 
   programs.steam = {
