@@ -172,7 +172,7 @@ in {
   hardware.sane.extraBackends = [pkgs.sane-airscan];
 
   # For scanner discovery by other programs; udev assigns "predictable names" to network interfaces
-  # services.udev.packages = [pkgs.sane-airscan];
+  services.udev.packages = [pkgs.sane-airscan];
 
   # Allow printer discovery on local network
   # services.avahi = {
