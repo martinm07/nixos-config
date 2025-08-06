@@ -55,7 +55,6 @@ in {
       "spotify"
       "steam"
       "steam-unwrapped"
-      "hplip"
     ];
 
   # system.nixos.label = "test-label";
@@ -170,17 +169,17 @@ in {
   # https://nixos.wiki/wiki/Scanners
   hardware.sane.enable = true;
   # "sane-airscan" is for "driverless" scanning
-  hardware.sane.extraBackends = [pkgs.hplipWithPlugin pkgs.sane-airscan];
+  hardware.sane.extraBackends = [pkgs.sane-airscan];
 
   # For scanner discovery by other programs; udev assigns "predictable names" to network interfaces
-  services.udev.packages = [pkgs.sane-airscan];
+  # services.udev.packages = [pkgs.sane-airscan];
 
   # Allow printer discovery on local network
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    openFirewall = true;
-  };
+  # services.avahi = {
+  #   enable = true;
+  #   nssmdns4 = true;
+  #   openFirewall = true;
+  # };
 
   hardware.printers = {
     ensurePrinters = [
