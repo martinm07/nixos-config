@@ -181,19 +181,11 @@ in {
     openFirewall = true;
   };
 
-  hardware.printers = {
-    ensurePrinters = [
-      {
-        name = "OfficeJet_Pro_7740";
-        location = "Home";
-        deviceUri = "dnssd://HP%20OfficeJet%20Pro%207740%20series%20%5BB8A5A1%5D._ipp._tcp.local/?uuid=2f27ae69-f91d-7a3d-c8a2-30f36d15e09b";
-        model = "drv:///hp/hpcups.drv/hp-officejet_pro_7740_series.ppd";
-        ppdOptions = {
-          PageSize = "A4";
-        };
-      }
-    ];
-  };
+  # To add the HP OfficeJet Pro 7740 printer requires using the unfree 'hp-setup' GUI included in
+  #  'pkgs.hplipWithPlugin'. So, we can do a one-time installation using nix-shell:
+  # NIXPKGS_ALLOW_UNFREE=1 nix-shell -p hplipWithPlugin --run 'sudo -E hp-setup'
+  #   And then it is automatically recognized by CUPS, it saves the PPD file under /etc/cups/ppd, and
+  #   everything should be fine (including after collecting garbage in the Nix store).
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
