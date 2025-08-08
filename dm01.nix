@@ -55,6 +55,7 @@ in {
       "spotify"
       "steam"
       "steam-unwrapped"
+      "ticktick"
     ];
 
   # system.nixos.label = "test-label";
@@ -327,8 +328,8 @@ in {
           regex
         ]
     ))
+    uv
     nodejs
-    ruby
     baobab
 
     # --- --- --- --
@@ -357,8 +358,8 @@ in {
     discord
     element-desktop
     spotify
-    simple-scan
     naps2
+    ticktick
   ];
 
   programs.steam = {
