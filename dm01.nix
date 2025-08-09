@@ -56,6 +56,7 @@ in {
       "steam"
       "steam-unwrapped"
       "ticktick"
+      "obsidian"
     ];
 
   # system.nixos.label = "test-label";
@@ -359,7 +360,10 @@ in {
     element-desktop
     spotify
     naps2
+    libreoffice-fresh
     ticktick
+    obsidian
+    calibre
   ];
 
   programs.steam = {
