@@ -360,13 +360,14 @@ in {
     # --- CASUAL APPS ---
     # --- --- --- --- ---
     discord
-    element-desktop
+    element-desktop # Matrix client
     spotify
-    naps2
+    naps2 # Scanning software
     libreoffice-fresh
     ticktick
     obsidian
     calibre
+    xournalpp # Xournal++; handwritten note-taking software (alternative to Microsoft OneNote)
   ];
 
   programs.steam = {
