@@ -127,6 +127,9 @@ in {
   # Enable the X11 windowing system (but also Wayland? See https://github.com/NixOS/nixpkgs/issues/94799)
   services.xserver.enable = true;
 
+  # Enabling support for Wacom drawing tablet (model Intuos PTH-451)
+  services.xserver.wacom.enable = true;
+
   # The "displayManager" refers to the lockscreen. Alternatives to lightdm are available.
   services.xserver.displayManager.lightdm.enable = true;
   # It seems like it is the desktop manager which decides for itself whether to use X11 or Wayland.
