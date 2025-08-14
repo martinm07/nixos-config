@@ -368,7 +368,7 @@ in {
     obsidian
     calibre
     xournalpp # Xournal++; handwritten note-taking software (alternative to Microsoft OneNote)
-    texliveBasic
+    texliveFull
   ];
 
   programs.steam = {
