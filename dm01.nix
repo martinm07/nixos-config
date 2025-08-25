@@ -370,6 +370,7 @@ in {
     xournalpp # Xournal++; handwritten note-taking software (alternative to Microsoft OneNote)
     texliveFull # For enabling LaTeX (this adds a LOT of stuff to the system)
     anki-bin # Anki (Spaced Repetition flashcard software); `anki-bin` is more up-to-date than `anki`
+    planify
   ];
 
   programs.steam = {
