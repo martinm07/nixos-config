@@ -57,6 +57,7 @@ in {
       "steam-unwrapped"
       "ticktick"
       "obsidian"
+      "google-chrome"
     ];
 
   # system.nixos.label = "test-label";
@@ -371,6 +372,7 @@ in {
     texliveFull # For enabling LaTeX (this adds a LOT of stuff to the system)
     anki-bin # Anki (Spaced Repetition flashcard software); `anki-bin` is more up-to-date than `anki`
     planify
+    google-chrome # Mainly for NativShark, which is almost unusable on Firefox thanks to audio tracks sporatically not loading
   ];
 
   programs.steam = {
