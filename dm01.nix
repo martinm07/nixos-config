@@ -4,6 +4,7 @@
 {
   config,
   pkgs,
+  nixpkgsUnstable,
   lib,
   # self,
   ...
@@ -320,7 +321,7 @@ in {
     #  into ~/.local/share/zed/languages/ (especially a JSON LSP for editing Zed's settings.json) and fails to do that because of Nix.
     # Since I started with zed-editor-fhs I got these files in my home directory, and after that the regular `zed-editor` was fine (i.e. I got lucky :))
     # See:   https://github.com/NixOS/nixpkgs/issues/421750     and:   https://wiki.nixos.org/wiki/Zed#LSP_Support
-    zed-editor
+    nixpkgsUnstable.legacyPackages.x86_64-linux.zed-editor
     nixd # Nix LSP
     alejandra # Nix formatter
     (python313.withPackages (
@@ -368,7 +369,7 @@ in {
     ticktick
     obsidian
     calibre
-    xournalpp # Xournal++; handwritten note-taking software (alternative to Microsoft OneNote)
+    nixpkgsUnstable.legacyPackages.x86_64-linux.xournalpp # Xournal++; handwritten note-taking software (alternative to Microsoft OneNote)
     texliveFull # For enabling LaTeX (this adds a LOT of stuff to the system)
     anki-bin # Anki (Spaced Repetition flashcard software); `anki-bin` is more up-to-date than `anki`
     planify

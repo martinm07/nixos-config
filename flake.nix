@@ -2,20 +2,21 @@
   description = "A very basic flake";
 
   inputs = {
-    # nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgsUnstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
   };
 
   outputs = {
     self,
     nixpkgs,
+    nixpkgsUnstable,
     ...
   }: let
     hostname = "dm01";
   in {
     nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      # specialArgs = {inherit inputs;};
+      specialArgs = {inherit nixpkgsUnstable;};
       modules = [
         {
           system.configurationRevision = self.rev or self.dirtyRev or null;
