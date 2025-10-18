@@ -34,7 +34,11 @@ in {
       efiSupport = true;
       useOSProber = true;
       configurationLimit = 120;
-      device = "/dev/disk/by-uuid/D522-BDE7";
+      # All of this bootloader stuff still goes over my head, but it seems like
+      # this "device" option asks NixOS to install GRUB in BIOS mode, whereas we're using UEFI boot
+      # Specifying a disk partition here will have NixOS attempt to install GRUB to my SSD's "Master Boot Record" (MBR)
+      # Specifying `boot.loader.grub.efiSupport` to true will have NixOS attempt to install the UEFI GRUB binary to `/boot/EFI/nixos`
+      device = "nodev";
     };
     efi = {
       canTouchEfiVariables = true;
