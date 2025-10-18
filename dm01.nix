@@ -34,7 +34,7 @@ in {
       efiSupport = true;
       useOSProber = true;
       configurationLimit = 120;
-      device = "nodev";
+      device = "/dev/disk/by-uuid/D522-BDE7";
     };
     efi = {
       canTouchEfiVariables = true;
