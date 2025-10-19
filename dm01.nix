@@ -352,7 +352,6 @@ in {
     #          TODO: Not necessary if using Heroic launcher as primary launcher for games...?
 
     hydralauncher # For getting download sources
-    lutris # TODO: Maybe useless? Have yet to find a use
     heroic # Primary games launcher
     prismlauncher # Minecraft launcher
 
@@ -376,7 +375,6 @@ in {
     nixpkgsUnstable.legacyPackages.x86_64-linux.xournalpp # Xournal++; handwritten note-taking software (alternative to Microsoft OneNote)
     texliveFull # For enabling LaTeX (this adds a LOT of stuff to the system)
     anki-bin # Anki (Spaced Repetition flashcard software); `anki-bin` is more up-to-date than `anki`
-    planify
     google-chrome # Mainly for NativShark, which is almost unusable on Firefox thanks to audio tracks sporatically not loading
   ];
 
