@@ -10,6 +10,7 @@
   ...
 }: let
   hostname = "dm01";
+  linkedApp = import ./apps/linked-derivation.nix {inherit pkgs;};
   # src = builtins.getFlake self;
 in {
   # system.configurationRevision = src.rev;
@@ -371,6 +372,7 @@ in {
     libreoffice-fresh
     ticktick
     super-productivity # Trialing this is an alternative to TickTick
+    linkedApp # Trialing this to replace TickTick's habit log
     obsidian
     calibre
     nixpkgsUnstable.legacyPackages.x86_64-linux.xournalpp # Xournal++; handwritten note-taking software (alternative to Microsoft OneNote)
@@ -421,6 +423,9 @@ in {
     # Includes packages that imperative DLLs (for example, downloaded by Zed extensions) are asking to have exist
     #  in the library path.
   ];
+
+  programs.appimage.enable = true;
+  programs.appimage.binfmt = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
