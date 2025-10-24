@@ -370,6 +370,7 @@ in {
     naps2 # Scanning software
     libreoffice-fresh
     ticktick
+    super-productivity # Trialing this is an alternative to TickTick
     obsidian
     calibre
     nixpkgsUnstable.legacyPackages.x86_64-linux.xournalpp # Xournal++; handwritten note-taking software (alternative to Microsoft OneNote)
