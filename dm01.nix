@@ -371,7 +371,7 @@ in {
     naps2 # Scanning software
     libreoffice-fresh
     ticktick
-    super-productivity # Trialing this is an alternative to TickTick
+    nixpkgsUnstable.legacyPackages.x86_64-linux.super-productivity # Trialing this is an alternative to TickTick
     linkedApp # Trialing this to replace TickTick's habit log
     obsidian
     calibre
