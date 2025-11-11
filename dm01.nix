@@ -271,7 +271,8 @@ in {
     clinfo # Verifying that OpenCL is correctly set up
     lact # GUI amdgpu controller
     vulkan-tools # Provides 'vulkaninfo' and 'vkcube' commands
-    piper # Handling my Logitech mouse
+    libratbag # Handling my Logitech mouse
+    piper # GUI for libratbag
 
     (writeShellScriptBin "nh-os-switch" ''
       set -euo pipefail
