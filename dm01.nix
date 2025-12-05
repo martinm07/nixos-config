@@ -382,7 +382,7 @@ in {
     anki-bin # Anki (Spaced Repetition flashcard software); `anki-bin` is more up-to-date than `anki`
     google-chrome # Mainly for NativShark, which is almost unusable on Firefox thanks to audio tracks sporatically not loading
     nixpkgsUnstable.legacyPackages.x86_64-linux.godot
-    # godot
+    darktable
   ];
 
   programs.steam = {
