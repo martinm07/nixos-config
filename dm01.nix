@@ -139,7 +139,12 @@ in {
   services.xserver.wacom.enable = true;
 
   # The "displayManager" refers to the lockscreen. Alternatives to lightdm are available.
-  services.xserver.displayManager.lightdm.enable = true;
+  # services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+  };
+
   # It seems like it is the desktop manager which decides for itself whether to use X11 or Wayland.
   # There is no Nix configuration like "servies.wayland.enable", and the existing "services.xserver.enable"
   #  does not necessarily mean that we will be using X11 (again, that is up to the desktop environmemt).
@@ -362,7 +367,7 @@ in {
     # --- --- ---- ---
 
     waybar
-    hyprpaper
+    wpaperd
     dunst # Notification daemon
     libnotify # Package that dunst depends on
     rofi-wayland # App launcher

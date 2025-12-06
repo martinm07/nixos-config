@@ -18,7 +18,7 @@
     #   fi
     # '';
     profileExtra = ''
-      exec hyprland
+      exec hyprland --config ~/.config/system/config/hypr/hyprland.conf
     '';
   };
 
