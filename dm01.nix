@@ -5,6 +5,7 @@
   config,
   pkgs,
   nixpkgsUnstable,
+  inputs,
   lib,
   # self,
   ...
@@ -365,6 +366,7 @@ in {
     dunst # Notification daemon
     libnotify # Package that dunst depends on
     rofi-wayland # App launcher
+    inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
 
     # --- --- --- --
     # --- GAMING ---
