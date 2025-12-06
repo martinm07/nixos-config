@@ -140,10 +140,24 @@ in {
 
   # The "displayManager" refers to the lockscreen. Alternatives to lightdm are available.
   # services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.displayManager.sddm = {
+  services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
   };
+
+  # Override the Hyprland start command to the new path for the configuration file
+  nixpkgs.overlays = [
+    (self: super: {
+      hyprland = super.hyprland.overrideAttrs (oldAttrs: {
+        postInstall =
+          (oldAttrs.postInstall or "")
+          + ''
+            wrapProgram $out/bin/Hyprland \
+              --add-flags "--config $HOME/.config/system/config/hypr/hyprland.conf"
+          '';
+      });
+    })
+  ];
 
   # It seems like it is the desktop manager which decides for itself whether to use X11 or Wayland.
   # There is no Nix configuration like "servies.wayland.enable", and the existing "services.xserver.enable"
