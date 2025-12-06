@@ -13,6 +13,21 @@
   hostname = "dm01";
   linkedApp = import ./apps/linked-derivation.nix {inherit pkgs;};
   # src = builtins.getFlake self;
+  hyprlandCustomSession =
+    pkgs.runCommand "hyprland-custom-session"
+    {
+      passthru.providedSessions = ["hyprland-custom"];
+    }
+    ''
+              mkdir -p $out/share/wayland-sessions
+              cat > $out/share/wayland-sessions/hyprland-custom.desktop <<'EOF'
+      [Desktop Entry]
+      Name=Hyprland (Custom Config)
+      Comment=Hyprland with live-editable config
+      Exec=${pkgs.hyprland}/bin/Hyprland --config "$HOME/.config/system/config/hypr/hyprland.conf"
+      Type=Application
+      EOF
+    '';
 in {
   # system.configurationRevision = src.rev;
   # system.nixos.label = "commit: ${self.sourceInfo.shortRev}";
@@ -145,19 +160,19 @@ in {
     wayland.enable = true;
   };
 
-  # Override the Hyprland start command to the new path for the configuration file
-  nixpkgs.overlays = [
-    (self: super: {
-      hyprland = super.hyprland.overrideAttrs (oldAttrs: {
-        postInstall =
-          (oldAttrs.postInstall or "")
-          + ''
-            wrapProgram $out/bin/Hyprland \
-              --add-flags "--config $HOME/.config/system/config/hypr/hyprland.conf"
-          '';
-      });
-    })
-  ];
+  # Create a custom Hyprland session with your config path
+  # services.displayManager.sessionPackages = [
+  #   (hyprlandCustomSession.overrideAttrs (old: {
+  #     passthru =
+  #       (old.passthru or {})
+  #       // {
+  #         providedSessions = ["hyprland-custom"];
+  #       };
+  #   }))
+  # ];
+  services.displayManager.sessionPackages = [hyprlandCustomSession];
+
+  services.displayManager.defaultSession = "hyprland-custom";
 
   # It seems like it is the desktop manager which decides for itself whether to use X11 or Wayland.
   # There is no Nix configuration like "servies.wayland.enable", and the existing "services.xserver.enable"
