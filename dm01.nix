@@ -13,21 +13,21 @@
   hostname = "dm01";
   linkedApp = import ./apps/linked-derivation.nix {inherit pkgs;};
   # src = builtins.getFlake self;
-  hyprlandCustomSession =
-    pkgs.runCommand "hyprland-custom-session"
-    {
-      passthru.providedSessions = ["hyprland-custom"];
-    }
-    ''
-              mkdir -p $out/share/wayland-sessions
-              cat > $out/share/wayland-sessions/hyprland-custom.desktop <<'EOF'
-      [Desktop Entry]
-      Name=Hyprland (Custom Config)
-      Comment=Hyprland with live-editable config
-      Exec=${pkgs.hyprland}/bin/Hyprland --config "$HOME/.config/system/config/hypr/hyprland.conf"
-      Type=Application
-      EOF
-    '';
+  # hyprlandCustomSession =
+  #   pkgs.runCommand "hyprland-custom-session"
+  #   {
+  #     passthru.providedSessions = ["hyprland-custom"];
+  #   }
+  #   ''
+  #             mkdir -p $out/share/wayland-sessions
+  #             cat > $out/share/wayland-sessions/hyprland-custom.desktop <<'EOF'
+  #     [Desktop Entry]
+  #     Name=Hyprland (Custom Config)
+  #     Comment=Hyprland with live-editable config
+  #     Exec=${pkgs.hyprland}/bin/Hyprland --config "$HOME/.config/system/config/hypr/hyprland.conf"
+  #     Type=Application
+  #     EOF
+  #   '';
 in {
   # system.configurationRevision = src.rev;
   # system.nixos.label = "commit: ${self.sourceInfo.shortRev}";
@@ -170,7 +170,24 @@ in {
   #       };
   #   }))
   # ];
-  services.displayManager.sessionPackages = [hyprlandCustomSession];
+  # services.displayManager.sessionPackages = [hyprlandCustomSession];
+  services.displayManager.sessionPackages = let
+    hyprlandCustom =
+      pkgs.runCommand "hyprland-custom-session"
+      {
+        passthru.providedSessions = ["hyprland-custom"];
+      }
+      ''
+                mkdir -p $out/share/wayland-sessions
+                cat > $out/share/wayland-sessions/hyprland-custom.desktop <<'EOF'
+        [Desktop Entry]
+        Name=Hyprland (Custom Config)
+        Comment=Hyprland with live-editable config
+        Exec=${pkgs.hyprland}/bin/Hyprland --config "\\$HOME/.config/system/config/hypr/hyprland.conf"
+        Type=Application
+        EOF
+      '';
+  in [hyprlandCustom];
 
   services.displayManager.defaultSession = "hyprland-custom";
 
