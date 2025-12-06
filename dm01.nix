@@ -183,7 +183,7 @@ in {
         [Desktop Entry]
         Name=Hyprland (Custom Config)
         Comment=Hyprland with live-editable config
-        Exec=${pkgs.hyprland}/bin/Hyprland --config "\\$HOME/.config/system/config/hypr/hyprland.conf"
+        Exec=${pkgs.hyprland}/bin/Hyprland --config "\''$HOME/.config/system/config/hypr/hyprland.conf"
         Type=Application
         EOF
       '';
