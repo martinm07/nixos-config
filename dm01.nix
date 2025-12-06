@@ -157,7 +157,17 @@ in {
   #  https://www.drakerossman.com/blog/wayland-on-nixos-confusion-conquest-triumph#getting-more-stuff-for-sway
   # For the question of why some categories software need/want a "Wayland-specific" implementation, refer to this Claude conversation:
   #  https://claude.ai/share/326a6e03-8145-44d5-b79b-21bcafbce0e9
-  services.xserver.desktopManager.budgie.enable = true;
+  # services.xserver.desktopManager.budgie.enable = true;
+
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
+  # Allows applications to interact with the Desktop Environment
+  #  (e.g. screen sharing, file sharing, file opening, etc.)
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
 
   environment.budgie.excludePackages = [
     pkgs.gnome-terminal
@@ -314,6 +324,7 @@ in {
     # --- DEVELOPER TOOLS ---
     # --- --- --- --- --- ---
     kitty
+    vim
     # There's also `zed-editor-fhs` for wrapping the editor in a Filesystem Hierarchy Standard (FHS) sandbox, allegedly
     #  for allowing extensions to work without Nix-specific configuration. These are extensions that try to run
     #  dynamically linked libraries (DLLs) e.g. that are language servers (like rust-analyzer): https://github.com/NixOS/nixpkgs/issues/309662
@@ -344,6 +355,16 @@ in {
     uv
     nodejs
     baobab
+
+    # --- --- ---- ---
+    # --- HYPRLAND ---
+    # --- --- ---- ---
+
+    waybar
+    hyprpaper
+    dunst # Notification daemon
+    libnotify # Package that dunst depends on
+    rofi-wayland # App launcher
 
     # --- --- --- --
     # --- GAMING ---
@@ -414,6 +435,8 @@ in {
 
   environment.sessionVariables = {
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
+    # Hint for electron apps to use wayland compositor
+    NIXOS_OZONE_WL = "1";
   };
 
   programs.git.enable = true;
