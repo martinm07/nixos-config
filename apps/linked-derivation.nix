@@ -35,6 +35,6 @@ in
         autoPatchelfHook
         asar
         # override doesn't preserve splicing https://github.com/NixOS/nixpkgs/issues/132651
-        (buildPackages.wrapGAppsHook.override {inherit (buildPackages) makeWrapper;})
+        (buildPackages.wrapGAppsHook3.override {inherit (buildPackages) makeWrapper;})
       ];
   }

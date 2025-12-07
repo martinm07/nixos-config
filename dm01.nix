@@ -159,7 +159,7 @@ in {
     packages = with pkgs; [
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
-      ubuntu_font_family
+      ubuntu-classic
       fira-code
     ];
 
@@ -395,7 +395,7 @@ in {
       ps:
         with ps; [
           flask
-          flask_wtf
+          flask-wtf
           wtforms
           twilio
           regex
@@ -413,13 +413,13 @@ in {
     wpaperd
     dunst # Notification daemon
     libnotify # Package that dunst depends on
-    rofi-wayland # App launcher
-    inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
+    rofi # App launcher
+    inputs.rose-pine-hyprcursor.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     # --- --- --- --
     # --- GAMING ---
     # --- --- --- --
-    protonup # Provides a CLI command `protonup` which installs the latest version of Proton GE
+    protonup-ng # Provides a CLI command `protonup` which installs the latest version of Proton GE
     #          This is so that Steam can use Proton GE to launch games (instead of Valve's official Proton releases).
     #          That is also the purpose of setting STEAM_EXTRA_COMPAT_TOOLS_PATHS in environment.sessionVariables later down
     #           (so that on Steam it appears under [selected game] > Properties... > Compatibility)
