@@ -32,28 +32,59 @@
   # "hyprland-custom-session" that is actually active. To do that there is this very helpful command:
   #      nix-store --query --requisites /run/current-system | grep hyprland
   # Essentially, it gets the closure of the current system (that is what "requisites" means), and filters the output by the keyword "hyprland"
+  # hyprland-custom-session =
+  #   pkgs.runCommand "hyprland-custom-session" {
+  #     passthru.providedSessions = ["hyprland-custom"];
+  #   } ''
+  #     mkdir -p $out/share/wayland-sessions
+  #     mkdir -p $out/bin
+
+  #     # Wrapper script that logs and starts Hyprland
+  #     cat > $out/bin/hyprland-custom <<'EOS'
+  #     #!/bin/sh
+  #     LOG="$HOME/.local/share/hyprland-launch.log"
+  #     mkdir -p "$(dirname "$LOG")"
+  #     echo "---- hyprland-start $(date) ----" >> "$LOG"
+  #     echo "ENV:" >> "$LOG"
+  #     env >> "$LOG"
+  #     echo "---- start Hyprland ----" >> "$LOG"
+  #     exec Hyprland --config "$HOME/.config/system/config/hypr/hyprland.conf" >> "$LOG" 2>&1
+  #     EOS
+  #     chmod +x $out/bin/hyprland-custom
+
+  #     # IMPORTANT: Exec must reference the wrapper INSIDE THIS PACKAGE:
+  #     cat > $out/share/wayland-sessions/hyprland-custom.desktop <<EOF
+  #     [Desktop Entry]
+  #     Name=Hyprland Custom
+  #     Comment=Hyprland with custom config
+  #     Exec=$out/bin/hyprland-custom
+  #     Type=Application
+  #     DesktopNames=Hyprland
+  #     Keywords=tiling;wayland;compositor;
+  #     EOF
+  #   '';
+
   hyprland-custom-session =
     pkgs.runCommand "hyprland-custom-session" {
       passthru.providedSessions = ["hyprland-custom"];
     } ''
-      mkdir -p $out/share/wayland-sessions
-      mkdir -p $out/bin
+          mkdir -p $out/share/wayland-sessions $out/bin
 
-      # Wrapper script that logs and starts Hyprland
-      cat > $out/bin/hyprland-custom <<'EOS'
-      #!/bin/sh
-      LOG="$HOME/.local/share/hyprland-launch.log"
-      mkdir -p "$(dirname "$LOG")"
-      echo "---- hyprland-start $(date) ----" >> "$LOG"
-      echo "ENV:" >> "$LOG"
-      env >> "$LOG"
-      echo "---- start Hyprland ----" >> "$LOG"
-      exec Hyprland --config "$HOME/.config/system/config/hypr/hyprland.conf" >> "$LOG" 2>&1
-      EOS
-      chmod +x $out/bin/hyprland-custom
+          # Wrapper script that logs and starts Hyprland
+          cat > $out/bin/hyprland-custom <<'EOS'
+          #!/bin/sh
+          LOG="$HOME/.local/share/hyprland-launch.log"
+          mkdir -p "$(dirname "$LOG")"
+          echo "---- hyprland-start $(date) ----" >> "$LOG"
+          echo "ENV:" >> "$LOG"
+          env >> "$LOG"
+          echo "---- start Hyprland ----" >> "$LOG"
+          exec Hyprland --config "$HOME/.config/system/config/hypr/hyprland.conf" >> "$LOG" 2>&1
+          EOS
+          chmod +x $out/bin/hyprland-custom
 
-      # IMPORTANT: Exec must reference the wrapper INSIDE THIS PACKAGE:
-      cat > $out/share/wayland-sessions/hyprland-custom.desktop <<EOF
+          # IMPORTANT: Exec must reference the wrapper INSIDE THIS PACKAGE:
+          cat > $out/share/wayland-sessions/hyprland-custom.desktop <<EOF
       [Desktop Entry]
       Name=Hyprland Custom
       Comment=Hyprland with custom config
