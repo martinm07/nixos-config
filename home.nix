@@ -6,9 +6,10 @@
 }: {
   home.username = "martinm";
   home.homeDirectory = "/home/martinm";
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
 
   xdg.enable = true;
+  programs.home-manager.enable = true;
   # programs.bash.enable = true;
 
   programs.git.enable = true;
