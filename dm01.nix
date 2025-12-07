@@ -35,11 +35,13 @@
       passthru.providedSessions = ["hyprland-custom"];
     } ''
       mkdir -p $out/share/wayland-sessions
-      cat <<EOF > $out/share/wayland-sessions/hyprland-custom.desktop
+
+      # Using 'EOF' (quoted) prevents $HOME from expanding to /homeless-shelter
+      cat <<'EOF' > $out/share/wayland-sessions/hyprland-custom.desktop
       [Desktop Entry]
       Name=Hyprland Custom
       Comment=Hyprland with custom config location
-      Exec=sh -c "Hyprland --config $HOME/.config/system/config/hypr/hyprland.conf"
+      Exec=sh -c "Hyprland --config $HOME/.config/system/hypr/hyprland.conf"
       Type=Application
       DesktopNames=Hyprland
       Keywords=tiling;wayland;compositor;
