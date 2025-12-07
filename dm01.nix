@@ -45,7 +45,7 @@
       [Desktop Entry]
       Name=Hyprland Custom
       Comment=Hyprland with custom config location
-      Exec=sh -c "Hyprland --config $HOME/.config/system/config/hypr/hyprland.conf"
+      Exec=sh -c "Hyprland --config /home/martinm/.config/system/config/hypr/hyprland.conf"
       Type=Application
       DesktopNames=Hyprland
       Keywords=tiling;wayland;compositor;
