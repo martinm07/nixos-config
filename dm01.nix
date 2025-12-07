@@ -12,68 +12,34 @@
 }: let
   hostname = "dm01";
   linkedApp = import ./apps/linked-derivation.nix {inherit pkgs;};
-  # src = builtins.getFlake self;
-  # hyprlandCustomSession =
-  #   pkgs.runCommand "hyprland-custom-session"
-  #   {
-  #     passthru.providedSessions = ["hyprland-custom"];
-  #   }
-  #   ''
-  #             mkdir -p $out/share/wayland-sessions
-  #             cat > $out/share/wayland-sessions/hyprland-custom.desktop <<'EOF'
-  #     [Desktop Entry]
-  #     Name=Hyprland (Custom Config)
-  #     Comment=Hyprland with live-editable config
-  #     Exec=${pkgs.hyprland}/bin/Hyprland --config "$HOME/.config/system/config/hypr/hyprland.conf"
-  #     Type=Application
-  #     EOF
-  #   '';
+
   # When finding what this actually produces, you need to go to /nix/store and find the entry of
   # "hyprland-custom-session" that is actually active. To do that there is this very helpful command:
   #      nix-store --query --requisites /run/current-system | grep hyprland
   # Essentially, it gets the closure of the current system (that is what "requisites" means), and filters the output by the keyword "hyprland"
-  # hyprland-custom-session =
-  #   pkgs.runCommand "hyprland-custom-session" {
-  #     passthru.providedSessions = ["hyprland-custom"];
-  #   } ''
-  #     mkdir -p $out/share/wayland-sessions
-  #     mkdir -p $out/bin
-
-  #     # Wrapper script that logs and starts Hyprland
-  #     cat > $out/bin/hyprland-custom <<'EOS'
-  #     #!/bin/sh
-  #     LOG="$HOME/.local/share/hyprland-launch.log"
-  #     mkdir -p "$(dirname "$LOG")"
-  #     echo "---- hyprland-start $(date) ----" >> "$LOG"
-  #     echo "ENV:" >> "$LOG"
-  #     env >> "$LOG"
-  #     echo "---- start Hyprland ----" >> "$LOG"
-  #     exec Hyprland --config "$HOME/.config/system/config/hypr/hyprland.conf" >> "$LOG" 2>&1
-  #     EOS
-  #     chmod +x $out/bin/hyprland-custom
-
-  #     # IMPORTANT: Exec must reference the wrapper INSIDE THIS PACKAGE:
-  #     cat > $out/share/wayland-sessions/hyprland-custom.desktop <<EOF
-  #     [Desktop Entry]
-  #     Name=Hyprland Custom
-  #     Comment=Hyprland with custom config
-  #     Exec=$out/bin/hyprland-custom
-  #     Type=Application
-  #     DesktopNames=Hyprland
-  #     Keywords=tiling;wayland;compositor;
-  #     EOF
-  #   '';
-
   hyprland-custom-session =
     pkgs.runCommand "hyprland-custom-session" {
+      # This is, the name of the .desktop file that is to define a session for the Display Manager,
+      #  to be able to select and log in to.
       passthru.providedSessions = ["hyprland-custom"];
     } ''
       mkdir -p $out/share/wayland-sessions $out/bin
 
       # Wrapper script that logs and starts Hyprland
+      # For whatever reason, simply calling Hyprland directly with something like
+      #  Hyprland --config "$HOME/.config/system/config/hypr/hyprland.conf"
+      # ...in the Exec field, fails. Firstly, it seems possible that the
+      #  "Desktop Entry Parser" doesn't understand env variables like $HOME-
+      #  or that in general; it doesn't execute in a full shell environment.
+      # Secondly, if you try to still execute it inline by putting something like
+      #  sh -c "Hyprland --config /home/martinm/.config/system/config/hypr/hyprland.conf"
+      # ...in the Exec field, it still fails. Possibly it crashes without some env variables,
+      #  possibly it doesn't properly spawn a long-running process- instead exiting right away,
+      #  possibly the "Desktop Entry Parser" doesn't like something about the quotes, or something
+      #  about the escaping.
       cat > $out/bin/hyprland-custom <<'EOS'
       #!/bin/sh
-      LOG="$HOME/.local/share/hyprland-launch.log"
+      LOG="$HOME/.local/share/hyprland/hyprland-launch.log"
       mkdir -p "$(dirname "$LOG")"
       echo "---- hyprland-start $(date) ----" >> "$LOG"
       echo "ENV:" >> "$LOG"
@@ -83,7 +49,6 @@
       EOS
       chmod +x $out/bin/hyprland-custom
 
-      # IMPORTANT: Exec must reference the wrapper INSIDE THIS PACKAGE:
       cat > $out/share/wayland-sessions/hyprland-custom.desktop <<EOF
       [Desktop Entry]
       Name=Hyprland Custom
@@ -94,24 +59,6 @@
       Keywords=tiling;wayland;compositor;
       EOF
     '';
-  # hyprland-custom-session =
-  #   pkgs.runCommand "hyprland-custom-session" {
-  #     # This tells NixOS: "Trust me, this package contains a session named 'hyprland-custom'"
-  #     # This MUST match the filename created below (minus the .desktop extension)
-  #     passthru.providedSessions = ["hyprland-custom"];
-  #   } ''
-  #     mkdir -p $out/share/wayland-sessions
-  #     # Using 'EOF' (quoted) prevents $HOME from expanding to /homeless-shelter
-  #     cat <<'EOF' > $out/share/wayland-sessions/hyprland-custom.desktop
-  #     [Desktop Entry]
-  #     Name=Hyprland Custom
-  #     Comment=Hyprland with custom config location
-  #     Exec=sh -c "Hyprland --config /home/martinm/.config/system/config/hypr/hyprland.conf"
-  #     Type=Application
-  #     DesktopNames=Hyprland
-  #     Keywords=tiling;wayland;compositor;
-  #     EOF
-  #   '';
 in {
   # system.configurationRevision = src.rev;
   # system.nixos.label = "commit: ${self.sourceInfo.shortRev}";
@@ -146,11 +93,6 @@ in {
       efiSysMountPoint = "/boot";
     };
   };
-  # boot.loader.grub.enable = true;
-  # boot.loader.grub.efiSupport = true;
-  # boot.loader.grub.useOSProber = true;
-  # boot.loader.grub.configurationLimit = 120;
-  # boot.loader.grub.device = "/dev/disk/by-uuid/8EA7-EE0A";
 
   # networking.hostName = "nixos"; # Define your hostname
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -166,7 +108,6 @@ in {
       "google-chrome"
     ];
 
-  # system.nixos.label = "test-label";
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Configure network proxy if necessary
@@ -237,42 +178,14 @@ in {
   # Enabling support for Wacom drawing tablet (model Intuos PTH-451)
   services.xserver.wacom.enable = true;
 
-  # The "displayManager" refers to the lockscreen. Alternatives to lightdm are available.
-  # services.xserver.displayManager.lightdm.enable = true;
+  # The "displayManager" refers to the lockscreen. LightDM is the default for NixOS
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
   };
 
   # Create a custom Hyprland session with your config path
-  # services.displayManager.sessionPackages = [
-  #   (hyprlandCustomSession.overrideAttrs (old: {
-  #     passthru =
-  #       (old.passthru or {})
-  #       // {
-  #         providedSessions = ["hyprland-custom"];
-  #       };
-  #   }))
-  # ];
   services.displayManager.sessionPackages = [hyprland-custom-session];
-  # services.displayManager.sessionPackages = let
-  #   hyprlandCustom =
-  #     pkgs.runCommand "hyprland-custom-session"
-  #     {
-  #       passthru.providedSessions = ["hyprland-custom"];
-  #     }
-  #     ''
-  #               mkdir -p $out/share/wayland-sessions
-  #               cat > $out/share/wayland-sessions/hyprland-custom.desktop <<'EOF'
-  #       [Desktop Entry]
-  #       Name=Hyprland (Custom Config)
-  #       Comment=Hyprland with live-editable config
-  #       Exec=${pkgs.hyprland}/bin/Hyprland --config "\''$HOME/.config/system/config/hypr/hyprland.conf"
-  #       Type=Application
-  #       EOF
-  #     '';
-  # in [hyprlandCustom];
-
   services.displayManager.defaultSession = "hyprland-custom";
 
   # It seems like it is the desktop manager which decides for itself whether to use X11 or Wayland.
