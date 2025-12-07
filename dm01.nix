@@ -28,6 +28,10 @@
   #     Type=Application
   #     EOF
   #   '';
+  # When finding what this actually produces, you need to go to /nix/store and find the entry of
+  # "hyprland-custom-session" that is actually active. To do that there is this very helpful command:
+  #      nix-store --query --requisites /run/current-system | grep hyprland
+  # Essentially, it gets the closure of the current system (that is what "requisites" means), and filters the output by the keyword "hyprland"
   hyprland-custom-session =
     pkgs.runCommand "hyprland-custom-session" {
       # This tells NixOS: "Trust me, this package contains a session named 'hyprland-custom'"
@@ -41,7 +45,7 @@
       [Desktop Entry]
       Name=Hyprland Custom
       Comment=Hyprland with custom config location
-      Exec=sh -c "Hyprland --config $HOME/.config/system/hypr/hyprland.conf"
+      Exec=sh -c "Hyprland --config $HOME/.config/system/config/hypr/hyprland.conf"
       Type=Application
       DesktopNames=Hyprland
       Keywords=tiling;wayland;compositor;
