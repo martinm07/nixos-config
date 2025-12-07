@@ -206,7 +206,6 @@ in {
   #  https://www.drakerossman.com/blog/wayland-on-nixos-confusion-conquest-triumph#getting-more-stuff-for-sway
   # For the question of why some categories software need/want a "Wayland-specific" implementation, refer to this Claude conversation:
   #  https://claude.ai/share/326a6e03-8145-44d5-b79b-21bcafbce0e9
-  services.xserver.desktopManager.budgie.enable = true;
 
   programs.hyprland = {
     enable = true;
@@ -409,7 +408,7 @@ in {
     # --- HYPRLAND ---
     # --- --- ---- ---
 
-    waybar
+    ironbar
     wpaperd
     dunst # Notification daemon
     libnotify # Package that dunst depends on

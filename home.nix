@@ -22,7 +22,7 @@
           $DRY_RUN_CMD echo "Warning: $link exists and is not a symlink, skipping"
         else
           $DRY_RUN_CMD rm -f "$link"
-          $DRY_RUN_CMD ln -s "$target" "$link"
+          $DRY_RUN_CMD ln -sf "$target" "$link"
         fi
       }
 
@@ -30,6 +30,7 @@
       #  MAKE SYMLINKS FROM DOTFILE LOCATIONS TO FILE LOCATIONS IN THIS GIT REPO
       # -------------------------------------------------------------------------
       link_config ~/.config/system/zshrc ~/.zshrc
+      link_config ~/.config/system/ironbar ~/.config/ironbar
     '';
   };
 }
