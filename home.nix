@@ -30,7 +30,7 @@
       #  MAKE SYMLINKS FROM DOTFILE LOCATIONS TO FILE LOCATIONS IN THIS GIT REPO
       # -------------------------------------------------------------------------
       link_config ~/.config/system/zshrc ~/.zshrc
-      link_config ~/.config/system/ironbar ~/.config/ironbar
+      # link_config ~/.config/system/ironbar ~/.config/ironbar
     '';
   };
 }
