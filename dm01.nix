@@ -161,6 +161,7 @@ in {
       noto-fonts-cjk-serif
       ubuntu-classic
       fira-code
+      nerd-fonts.jetbrains-mono
     ];
 
     fontconfig = {
@@ -414,6 +415,7 @@ in {
     libnotify # Package that dunst depends on
     rofi # App launcher
     inputs.rose-pine-hyprcursor.packages.${pkgs.stdenv.hostPlatform.system}.default
+    paper-gtk-theme
 
     # --- --- --- --
     # --- GAMING ---
