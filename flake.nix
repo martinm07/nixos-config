@@ -38,15 +38,15 @@
         # so the old configuration file still takes effect
         ./${hostname}.nix
 
-        home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            users.martinm = import ./home.nix;
-            backupFileExtension = "backup";
-          };
-        }
+        # home-manager.nixosModules.home-manager
+        # {
+        #   home-manager = {
+        #     useGlobalPkgs = true;
+        #     useUserPackages = true;
+        #     users.martinm = import ./home.nix;
+        #     backupFileExtension = "backup";
+        #   };
+        # }
       ];
     };
   };
