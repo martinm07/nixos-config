@@ -8,6 +8,25 @@
   home.homeDirectory = "/home/martinm";
   home.stateVersion = "25.05";
 
+  xdg.enable = true;
+  # programs.bash.enable = true;
+
+  programs.git.enable = true;
+  programs.bash = {
+    enable = true;
+    shellAliases = {
+      btw = "echo i use nixos, btw";
+    };
+    # profileExtra = ''
+    #   if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
+    #     exec uwsm start -S hyprland-uwsm.desktop
+    #   fi
+    # '';
+    profileExtra = ''
+      exec hyprland --config ~/.config/system/config/hypr/hyprland.conf
+    '';
+  };
+
   # home.activation = {
   #   linkDotfiles = lib.hm.dag.entryAfter ["writeBoundary"] ''
   #     #!/usr/bin/env bash
