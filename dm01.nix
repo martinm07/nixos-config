@@ -28,6 +28,23 @@
   #     Type=Application
   #     EOF
   #   '';
+  hyprland-custom-session =
+    pkgs.runCommand "hyprland-custom-session" {
+      # This tells NixOS: "Trust me, this package contains a session named 'hyprland-custom'"
+      # This MUST match the filename created below (minus the .desktop extension)
+      passthru.providedSessions = ["hyprland-custom"];
+    } ''
+      mkdir -p $out/share/wayland-sessions
+      cat <<EOF > $out/share/wayland-sessions/hyprland-custom.desktop
+      [Desktop Entry]
+      Name=Hyprland Custom
+      Comment=Hyprland with custom config location
+      Exec=sh -c "Hyprland --config $HOME/.config/system/config/hypr/hyprland.conf"
+      Type=Application
+      DesktopNames=Hyprland
+      Keywords=tiling;wayland;compositor;
+      EOF
+    '';
 in {
   # system.configurationRevision = src.rev;
   # system.nixos.label = "commit: ${self.sourceInfo.shortRev}";
@@ -170,24 +187,24 @@ in {
   #       };
   #   }))
   # ];
-  # services.displayManager.sessionPackages = [hyprlandCustomSession];
-  services.displayManager.sessionPackages = let
-    hyprlandCustom =
-      pkgs.runCommand "hyprland-custom-session"
-      {
-        passthru.providedSessions = ["hyprland-custom"];
-      }
-      ''
-                mkdir -p $out/share/wayland-sessions
-                cat > $out/share/wayland-sessions/hyprland-custom.desktop <<'EOF'
-        [Desktop Entry]
-        Name=Hyprland (Custom Config)
-        Comment=Hyprland with live-editable config
-        Exec=${pkgs.hyprland}/bin/Hyprland --config "\''$HOME/.config/system/config/hypr/hyprland.conf"
-        Type=Application
-        EOF
-      '';
-  in [hyprlandCustom];
+  services.displayManager.sessionPackages = [hyprland-custom-session];
+  # services.displayManager.sessionPackages = let
+  #   hyprlandCustom =
+  #     pkgs.runCommand "hyprland-custom-session"
+  #     {
+  #       passthru.providedSessions = ["hyprland-custom"];
+  #     }
+  #     ''
+  #               mkdir -p $out/share/wayland-sessions
+  #               cat > $out/share/wayland-sessions/hyprland-custom.desktop <<'EOF'
+  #       [Desktop Entry]
+  #       Name=Hyprland (Custom Config)
+  #       Comment=Hyprland with live-editable config
+  #       Exec=${pkgs.hyprland}/bin/Hyprland --config "\''$HOME/.config/system/config/hypr/hyprland.conf"
+  #       Type=Application
+  #       EOF
+  #     '';
+  # in [hyprlandCustom];
 
   services.displayManager.defaultSession = "hyprland-custom";
 
