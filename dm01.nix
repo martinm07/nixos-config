@@ -34,23 +34,53 @@
   # Essentially, it gets the closure of the current system (that is what "requisites" means), and filters the output by the keyword "hyprland"
   hyprland-custom-session =
     pkgs.runCommand "hyprland-custom-session" {
-      # This tells NixOS: "Trust me, this package contains a session named 'hyprland-custom'"
-      # This MUST match the filename created below (minus the .desktop extension)
       passthru.providedSessions = ["hyprland-custom"];
     } ''
       mkdir -p $out/share/wayland-sessions
+      mkdir -p $out/bin
 
-      # Using 'EOF' (quoted) prevents $HOME from expanding to /homeless-shelter
-      cat <<'EOF' > $out/share/wayland-sessions/hyprland-custom.desktop
+      # Wrapper script that logs and starts Hyprland
+      cat > $out/bin/hyprland-custom <<'EOS'
+      #!/bin/sh
+      LOG="$HOME/.local/share/hyprland-launch.log"
+      mkdir -p "$(dirname "$LOG")"
+      echo "---- hyprland-start $(date) ----" >> "$LOG"
+      echo "ENV:" >> "$LOG"
+      env >> "$LOG"
+      echo "---- start Hyprland ----" >> "$LOG"
+      exec Hyprland --config "$HOME/.config/system/config/hypr/hyprland.conf" >> "$LOG" 2>&1
+      EOS
+      chmod +x $out/bin/hyprland-custom
+
+      # IMPORTANT: Exec must reference the wrapper INSIDE THIS PACKAGE:
+      cat > $out/share/wayland-sessions/hyprland-custom.desktop <<EOF
       [Desktop Entry]
       Name=Hyprland Custom
-      Comment=Hyprland with custom config location
-      Exec=sh -c "Hyprland --config /home/martinm/.config/system/config/hypr/hyprland.conf"
+      Comment=Hyprland with custom config
+      Exec=$out/bin/hyprland-custom
       Type=Application
       DesktopNames=Hyprland
       Keywords=tiling;wayland;compositor;
       EOF
     '';
+  # hyprland-custom-session =
+  #   pkgs.runCommand "hyprland-custom-session" {
+  #     # This tells NixOS: "Trust me, this package contains a session named 'hyprland-custom'"
+  #     # This MUST match the filename created below (minus the .desktop extension)
+  #     passthru.providedSessions = ["hyprland-custom"];
+  #   } ''
+  #     mkdir -p $out/share/wayland-sessions
+  #     # Using 'EOF' (quoted) prevents $HOME from expanding to /homeless-shelter
+  #     cat <<'EOF' > $out/share/wayland-sessions/hyprland-custom.desktop
+  #     [Desktop Entry]
+  #     Name=Hyprland Custom
+  #     Comment=Hyprland with custom config location
+  #     Exec=sh -c "Hyprland --config /home/martinm/.config/system/config/hypr/hyprland.conf"
+  #     Type=Application
+  #     DesktopNames=Hyprland
+  #     Keywords=tiling;wayland;compositor;
+  #     EOF
+  #   '';
 in {
   # system.configurationRevision = src.rev;
   # system.nixos.label = "commit: ${self.sourceInfo.shortRev}";
