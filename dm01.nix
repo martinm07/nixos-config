@@ -411,7 +411,7 @@ in {
 
     ironbar
     wpaperd
-    dunst # Notification daemon
+    swaynotificationcenter # SwayNC (notification manager that should also work with Hyprland)
     libnotify # Package that dunst depends on
     rofi # App launcher
     inputs.rose-pine-hyprcursor.packages.${pkgs.stdenv.hostPlatform.system}.default

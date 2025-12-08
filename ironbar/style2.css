@@ -1,0 +1,259 @@
+@define-color dark-primary #1c1c1c;
+@define-color dark-secondary #2d2d2d;
+
+@define-color border-dark #776de8;
+@define-color border-light #776de8;
+
+@define-color white #ffffff;
+@define-color active #776de8;
+@define-color urgent #8f0a0a;
+
+.background {
+  background-color: @dark-primary;
+}
+
+* {
+  /*--margin-lg: 1em;
+  --margin-sm: 0.5em;
+  --margin-xs: 0.25em;
+
+  --size-xxl: 2.6em;
+  --size-xl: 2.2em;
+  --size-lg: 1.5em;
+  --size-md: 16px;*/
+
+  font-family: sans-serif;
+  font-size: 16px;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+}
+
+popover,
+popover contents {
+  border-radius: 12px;
+  padding: 0;
+}
+
+window,
+popover {
+  background-color: @dark-secondary;
+}
+
+box,
+button,
+label,
+calendar {
+  background-color: #000;
+}
+
+#bar,
+popover contents {
+  background: linear-gradient(90deg, #6699cc 35%, #cc99cc 100%);
+}
+
+scale.horizontal highlight {
+  background: linear-gradient(90deg, #6699cc 35%, #cc99cc 100%);
+}
+
+scale.vertical highlight {
+  background: linear-gradient(0, #6699cc 35%, #cc99cc 100%);
+}
+
+slider {
+  border-radius: 100%;
+}
+
+button {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+button:hover,
+button:active {
+  background-color: @dark-secondary;
+}
+
+dropdown popover row:hover,
+dropdown popover row:focus,
+dropdown popover row:selected {
+  background-color: @dark-secondary;
+}
+
+radio {
+  /* make purple */
+  /*-gtk-icon-filter: hue-rotate(45deg) contrast(0.6);*/
+  margin-right: 0.5em;
+}
+
+#end > * + * {
+  margin-left: 0.5em;
+}
+
+.popup {
+  padding: 1em;
+}
+
+/* --- clock --- */
+
+.clock {
+  font-weight: bold;
+}
+
+.popup-clock .calendar-clock {
+  font-size: 2.2em;
+  margin-bottom: 0.25em;
+}
+
+.popup-clock .calendar .today {
+  background-color: #776de8;
+  border-radius: 0.25em;
+}
+
+.popup-clipboard .item {
+  padding: 0.25em;
+}
+
+.popup-clipboard .item + .item {
+  border-top: 1px solid @border-light;
+}
+
+/* --- launcher --- */
+
+.launcher .item + .item {
+  margin-left: 4px;
+}
+
+.launcher .item.open {
+  box-shadow: inset 0 -1px @white;
+}
+
+.launcher .item.focused {
+  box-shadow: inset 0 -1px @active;
+}
+
+.launcher .item.urgent {
+  box-shadow: inset 0 -1px @urgent;
+}
+
+.popup-launcher {
+  padding: 0.5em;
+}
+
+.popup-launcher .popup-item {
+  padding: 1em;
+  border-radius: 10px;
+}
+
+.popup-launcher .popup-item label {
+  margin-top: 0.5em;
+}
+
+/* --- menu --- */
+
+.menu label {
+  padding: 0 0.5em;
+}
+
+.popup-menu .sub-menu {
+  border-left: 1px solid @border-light;
+  padding-left: 0.5em;
+}
+
+.popup-menu .category,
+.popup-menu .application {
+  padding: 0.25em;
+}
+
+.popup-menu .category.open {
+  background-color: @dark-secondary;
+}
+
+/* --- music --- */
+
+.popup-music .album-art {
+  margin-right: 1em;
+  border-radius: 5px;
+}
+
+.popup-music .icon-box {
+  margin-right: 0.5em;
+}
+
+.popup-music .title .icon,
+.popup-music .title .label {
+  font-size: 1.5em;
+}
+
+.popup-music .artist .label,
+.popup-music .album .label {
+  margin-left: 6px;
+}
+
+.popup-music .volume .icon {
+  /* fix icon offset */
+  margin-right: 3px;
+}
+
+/* --- notifications --- */
+
+.notifications .count {
+  font-size: 0.8em;
+  padding: 0.18em;
+}
+
+/* --- sysinfo --- */
+
+.sysinfo > .item + .item {
+  margin-left: 0.5em;
+}
+
+/* --- tray --- */
+
+.tray popover contents {
+  padding: 1em;
+}
+
+/* --- volume --- */
+
+.popup-volume .device-box {
+  border-right: 1px solid @border-light;
+}
+
+/* --- workspaces --- */
+
+.workspaces .item.visible {
+  box-shadow: inset 0 -1px @white;
+}
+
+.workspaces .item.focused {
+  box-shadow: inset 0 -1px @active;
+  background-color: @dark-secondary;
+}
+
+.workspaces .item.urgent {
+  background-color: @urgent;
+}
+
+/* --- custom: power menu ---  */
+
+.popup-power-menu #header {
+  font-size: 1.5em;
+  margin-bottom: 0.6em;
+}
+
+.popup-power-menu .power-btn {
+  border: 1px solid @border-dark;
+  border-radius: 10px;
+  padding: 0 1.2em;
+}
+
+.popup-power-menu .power-btn label {
+  font-size: 2.6em;
+}
+
+/* need to use funky selector
+due to widgets being wrapped in GtkRevealers */
+.popup-power-menu #buttons > * + * {
+  margin-left: 1.3em;
+}
