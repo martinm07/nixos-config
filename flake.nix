@@ -13,6 +13,8 @@
       url = "github:ndom91/rose-pine-hyprcursor";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Fixes the "Open with" menu not being populated/ Dolphin forgetting file associations with applications
+    dolphin-overlay.url = "github:rumboon/dolphin-overlay";
   };
 
   outputs = {
@@ -20,6 +22,7 @@
     nixpkgs,
     nixpkgsUnstable,
     home-manager,
+    dolphin-overlay,
     ...
   } @ inputs: let
     hostname = "dm01";
@@ -33,6 +36,9 @@
       modules = [
         {
           system.configurationRevision = self.rev or self.dirtyRev or null;
+          nixpkgs.overlays = [
+            dolphin-overlay.overlays.default
+          ];
         }
         # Import the previous configuration.nix we used,
         # so the old configuration file still takes effect
