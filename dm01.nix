@@ -143,15 +143,15 @@ in {
     ibus.engines = with pkgs.ibus-engines; [mozc];
   };
 
-  systemd.user.services."ibus-wayland" = {
-    description = "IBus (Wayland) UI + daemon (start as child)";
-    wantedBy = ["default.target"];
-    serviceConfig = {
-      ExecStart = "${pkgs.coreutils}/bin/env -u GTK_IM_MODULE -u QT_IM_MODULE ${pkgs.ibus}/libexec/ibus-ui-gtk3 --enable-wayland-im --exec-daemon --daemon-args \"--xim --panel disable\"";
-      Restart = "on-failure";
-      RestartSec = "2s";
-    };
-  };
+  # systemd.user.services."ibus-wayland" = {
+  #   description = "IBus (Wayland) UI + daemon (start as child)";
+  #   wantedBy = ["default.target"];
+  #   serviceConfig = {
+  #     ExecStart = "${pkgs.coreutils}/bin/env -u GTK_IM_MODULE -u QT_IM_MODULE ${pkgs.ibus}/libexec/ibus-ui-gtk3 --enable-wayland-im --exec-daemon --daemon-args \"--xim --panel disable\"";
+  #     Restart = "on-failure";
+  #     RestartSec = "2s";
+  #   };
+  # };
 
   # This is additional config, for mapping CapsLock to "Eisu toggle" on the Japanese keyboard
   #  (essentially, just getting alphanumeric lettering; katakana is achieved by holding Shift)
@@ -523,6 +523,9 @@ in {
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
     # Hint for electron apps to use wayland compositor
     NIXOS_OZONE_WL = "1";
+
+    GTK_IM_MODULE = null;
+    QT_IM_MODULE = null;
   };
 
   programs.git.enable = true;
