@@ -139,8 +139,25 @@ in {
 
   i18n.inputMethod = {
     enable = true;
-    type = "ibus";
-    ibus.engines = with pkgs.ibus-engines; [mozc];
+    # type = "ibus";
+    # ibus.engines = with pkgs.ibus-engines; [mozc];
+    type = "fcitx5";
+    fcitx5.addons = with pkgs; [fcitx5-mozc fcitx5-gtk];
+  };
+
+  environment.variables = {
+    # Force GTK_IM_MODULE to be empty to prevent GTK apps from using IBus legacy code.
+    # They will auto-detect Wayland and use the text-input protocol instead.
+    GTK_IM_MODULE = lib.mkForce "";
+
+    # For QT, "wayland" is usually the best setting on Hyprland, provided you have
+    # qt5.qtwayland and qt6.qtwayland installed.
+    # If that causes issues, you can set this to "" (empty) as well.
+    QT_IM_MODULE = lib.mkForce "wayland";
+
+    # Keep XMODIFIERS set to ibus so XWayland apps (like Steam or old apps) still work.
+    # The IBus module usually sets this automatically, but you can be explicit if you want.
+    XMODIFIERS = "@im=fcitx";
   };
 
   # systemd.user.services."ibus-wayland" = {
@@ -526,21 +543,6 @@ in {
 
     # GTK_IM_MODULE = null;
     # QT_IM_MODULE = null;
-  };
-
-  environment.variables = {
-    # Force GTK_IM_MODULE to be empty to prevent GTK apps from using IBus legacy code.
-    # They will auto-detect Wayland and use the text-input protocol instead.
-    GTK_IM_MODULE = lib.mkForce "";
-
-    # For QT, "wayland" is usually the best setting on Hyprland, provided you have
-    # qt5.qtwayland and qt6.qtwayland installed.
-    # If that causes issues, you can set this to "" (empty) as well.
-    QT_IM_MODULE = lib.mkForce "wayland";
-
-    # Keep XMODIFIERS set to ibus so XWayland apps (like Steam or old apps) still work.
-    # The IBus module usually sets this automatically, but you can be explicit if you want.
-    XMODIFIERS = "@im=ibus";
   };
 
   programs.git.enable = true;
