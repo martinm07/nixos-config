@@ -437,6 +437,7 @@ in {
     pwvucontrol # Small audio controller/manager application
     nwg-displays # Small display manager application
     btop # System resources TUI
+    networkmanagerapplet # Network manager
 
     # --- --- --- --
     # --- GAMING ---
