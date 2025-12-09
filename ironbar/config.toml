@@ -3,11 +3,105 @@ anchor_to_edges = true
 height = 42
 position = "bottom"
 
+### POWER MENU
+
+[[start]]
+class = 'power-menu'
+tooltip = '''Up: {{30000:$HOME/.config/system/ironbar/uptime.sh | cut -d ' ' -f2-}}'''
+type = 'custom'
+
+[[start.bar]]
+label = ''
+name = 'power-btn'
+on_click = 'popup:toggle'
+type = 'button'
+
+[[start.popup]]
+orientation = 'vertical'
+type = 'box'
+
+[[start.popup.widgets]]
+label = 'Power menu'
+name = 'header'
+type = 'label'
+
+[[start.popup.widgets]]
+type = 'box'
+
+# SUSPEND BUTTON
+
+[[start.popup.widgets.widgets]]
+type = 'box'
+orientation = 'vertical'
+class = 'power-btn-container'
+
+[[start.popup.widgets.widgets.widgets]]
+type = "button"
+class = "power-btn"
+label = '󰍷'
+on_click = "!systemctl suspend"
+justify = "left"
+
+[[start.popup.widgets.widgets.widgets]]
+type = "label"
+class = "power-btn-label"
+label = "Suspend"
+justify = "center"
+
+# POWER OFF BUTTON
+
+[[start.popup.widgets.widgets]]
+type = 'box'
+orientation = 'vertical'
+class = 'power-btn-container'
+
+[[start.popup.widgets.widgets.widgets]]
+class = 'power-btn'
+label = ''''''
+on_click = '!shutdown now'
+type = 'button'
+
+[[start.popup.widgets.widgets.widgets]]
+type = "label"
+class = "power-btn-label"
+label = "Power off"
+justify = "center"
+
+# REBOOT BUTTON
+
+[[start.popup.widgets.widgets]]
+type = 'box'
+orientation = 'vertical'
+class = 'power-btn-container'
+
+[[start.popup.widgets.widgets.widgets]]
+class = 'power-btn'
+label = ''''''
+on_click = '!reboot'
+type = 'button'
+
+[[start.popup.widgets.widgets.widgets]]
+type = "label"
+class = "power-btn-label"
+label = "Reboot"
+justify = "center"
+
+# UPTIME DISPLAY
+
+[[start.popup.widgets]]
+label = '''Uptime: {{30000:$HOME/.config/system/ironbar/uptime.sh | cut -d ' ' -f2-}}'''
+name = 'uptime'
+type = 'label'
+
+### WORKSPACES
+
 [[start]]
 type = "workspaces"
 all_monitors = false
 on_scroll_up = "swaymsg workspace prev_on_output"
 on_scroll_down = "swaymsg workspace next_on_output"
+
+### MUSIC PLAYER
 
 [[center]]
 type = "music"
@@ -20,11 +114,80 @@ truncate = "end"
 play = ""
 pause = ""
 
+### SETTINGS MENU
+
+[[end]]
+class = 'settings'
+type = 'custom'
+
+[[end.bar]]
+label = '''<span font-size='16pt'></span>'''
+name = 'settings-btn'
+on_click = 'popup:toggle'
+type = 'button'
+
+[[end.popup]]
+orientation = 'vertical'
+type = 'box'
+class = 'settings-popup'
+
+[[end.popup.widgets]]
+label = 'Settings'
+name = 'header'
+type = 'label'
+class = 'settings-title'
+
+[[end.popup.widgets]]
+type = 'box'
+orientation = 'vertical'
+
+# NETWORK MANAGER
+
+[[end.popup.widgets.widgets]]
+type = 'button'
+class = 'settings-btn'
+label = 'Network'
+on_click = '!nm-connection-editor'
+
+# BLUETOOTH MANAGER
+
+[[end.popup.widgets.widgets]]
+type = 'button'
+class = 'settings-btn'
+label = 'Bluetooth'
+on_click = '!blueman-manager'
+
+# AUDIO MANAGER
+
+[[end.popup.widgets.widgets]]
+type = 'button'
+class = 'settings-btn'
+label = 'Audio'
+on_click = '!pwvucontrol'
+
+# DISPLAY MANAGER
+
+[[end.popup.widgets.widgets]]
+type = 'button'
+class = 'settings-btn'
+label = 'Display'
+on_click = '!nwg-displays'
+
+# SYSTEM RESOURCES VIEW & MANAGER
+
+[[end.popup.widgets.widgets]]
+type = 'button'
+class = 'settings-btn'
+label = 'System Resources'
+on_click = '!kitty --hold btop'
+
+### QUICK SYSTEM INFO
+
 [[end]]
 type = "sys_info"
 format = [
     "⟮<span></span> {cpu_percent}%⟯",
-    "⟮ {memory_percent}%⟯",
+    "⟮ {memory_used} GB⟯",
     "⟮󰋊 {disk_percent:/}%⟯",
     "⟮󰓢 {net_down:eno1}/{net_up:eno1} Mbps⟯",
 ]
@@ -36,12 +199,20 @@ temps = 5
 disks = 300
 networks = 3
 
+### NETWORK MANAGER (CURRENTLY SEEMINGLY DEFUNCT)
+
+[[end]]
+type = "network_manager"
+icon_size = 32
+
+### VOLUME CONTROLS
+
 [[end]]
 type = "volume"
 format = "{icon} {percentage}%"
 max_volume = 100
-on_scroll_up = "pactl set-sink-volume @DEFAULT_SINK@ +10%"
-on_scroll_down = "pactl set-sink-volume @DEFAULT_SINK@ -10%"
+on_scroll_up = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%+"
+on_scroll_down = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%-"
 
 [end.icons]
 volume_high = "󰕾"
@@ -53,16 +224,19 @@ muted = "󰝟"
 mode = "end"
 length = 50
 
+### DATE, CLOCK, CALENDAR
+
 [[end]]
 type = "clock"
 format = "  %H:%M:%S %d/%m/%Y"
+
+### SYSTEM TRAY
 
 [[end]]
 type = "tray"
 direction = "horizontal"
 
-# [[start]]
-# type = "sway_mode"
+### NOTIFICATIONS BUTTON
 
 [[end]]
 type = "notifications"

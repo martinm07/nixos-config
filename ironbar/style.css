@@ -157,12 +157,21 @@ scale trough slider {
   margin-left: 10px;
 }
 .tray menu {
-  background-color: rgba(0, 0, 0, 0.7);
+  /*background-color: rgba(0, 0, 0, 0.7);*/
   padding: 8px 0px;
 }
 /* Overrides the label text just for the tray */
 .tray label {
-  /* color: black; */
+  color: black;
+}
+
+menu menuitem label,
+menu menuitem {
+  color: #2d2d2d;
+}
+
+menu menuitem:hover {
+  background-color: @color_text;
 }
 
 /* -- volume -- */
@@ -204,6 +213,12 @@ scale trough slider {
 /* -- music -- */
 .popup-music {
   background-color: @color_bg;
+  /*min-width: 25em;*/
+  /*max-width: 15px;*/
+}
+
+.popup-music .volume {
+  margin-left: 4em;
 }
 
 .popup-music .progress .slider slider,
@@ -217,4 +232,54 @@ scale trough slider {
 .popup-music .progress .slider highlight,
 .popup-music .volume .slider highlight {
   background: #5e2e40;
+}
+
+/* -- settings (CUSTOM) -- */
+.settings {
+  padding-right: 15px;
+}
+.settings button {
+  padding-right: 1em;
+}
+
+.popup-settings {
+  background-color: @color_bg;
+}
+
+.settings-title {
+  margin-bottom: 0.25em;
+  padding-bottom: 0.25em;
+  border-bottom: 1px solid @color_text;
+  font-size: 1.5em;
+}
+
+/* -- power menu (CUSTOM) -- */
+.power-menu {
+  margin-right: 10px;
+}
+
+.power-menu button {
+  padding-right: 1em;
+}
+
+.popup-power-menu {
+  background-color: @color_bg;
+}
+.popup-power-menu #header {
+  font-size: 2em;
+  text-decoration: double underline;
+  margin-bottom: 0.5em;
+}
+.power-btn {
+  padding: 0 50px;
+}
+.power-btn label {
+  padding-right: 10pt;
+  min-width: 40pt;
+  font-size: 40pt;
+}
+
+#uptime {
+  margin-top: 15px;
+  font-style: italic;
 }

@@ -274,6 +274,17 @@ in {
     #media-session.enable = true;
   };
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Experimental = true;
+      };
+    };
+  };
+  services.blueman.enable = true;
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -409,13 +420,23 @@ in {
     # --- HYPRLAND ---
     # --- --- ---- ---
 
-    ironbar
-    wpaperd
+    ironbar # Status bar
+    wpaperd # Wallpaper manager
     swaynotificationcenter # SwayNC (notification manager that should also work with Hyprland)
-    libnotify # Package that dunst depends on
+    libnotify # Package that dunst depends on (TODO: Does SwayNC depend on it?)
     rofi # App launcher
     inputs.rose-pine-hyprcursor.packages.${pkgs.stdenv.hostPlatform.system}.default
     paper-gtk-theme
+
+    kdePackages.dolphin # File browser
+    mate.pluma # Text editor
+    qalculate-gtk # Calculator (that is very cool)
+    vlc # Video viewer/playback
+    swayimg # Image viewer
+
+    pwvucontrol # Small audio controller/manager application
+    nwg-displays # Small display manager application
+    btop # System resources TUI
 
     # --- --- --- --
     # --- GAMING ---
