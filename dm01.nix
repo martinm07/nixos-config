@@ -106,6 +106,7 @@ in {
       "ticktick"
       "obsidian"
       "google-chrome"
+      "zoom-us"
     ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
@@ -477,6 +478,7 @@ in {
     google-chrome # Mainly for NativShark, which is almost unusable on Firefox thanks to audio tracks sporatically not loading
     nixpkgsUnstable.legacyPackages.x86_64-linux.godot
     darktable
+    zoom-us
   ];
 
   programs.steam = {
