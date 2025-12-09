@@ -178,6 +178,7 @@ in {
   # Where the backtick mapping comes from: https://gist.github.com/keckelt/0ba90f8840e2903bfdc54c7e19ad4613
   # More info on keyboard keycode mapping with xmodmap: https://chatgpt.com/share/688a93b8-7dbc-8002-94f0-1840096aab22
   # This is supposed to run on startup. Taken from here: https://nixos.wiki/wiki/Keyboard_Layout_Customization
+  # TODO: This doesn't do anything on a Wayland setup.
   services.xserver.displayManager.sessionCommands = ''sleep 5 && ${pkgs.xorg.xmodmap}/bin/xmodmap ${pkgs.writeText "keymap-mod" ''
       keycode 66 = Eisu_toggle Caps_Lock
       keycode  49 = grave notsign dead_grave notsign brokenbar notsign brokenbar
@@ -468,6 +469,8 @@ in {
     nwg-displays # Small display manager application
     btop # System resources TUI
     networkmanagerapplet # Network manager
+
+    kdePackages.breeze-icons
 
     # --- --- --- --
     # --- GAMING ---
