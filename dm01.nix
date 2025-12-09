@@ -107,6 +107,7 @@ in {
       "obsidian"
       "google-chrome"
       "zoom-us"
+      "zoom"
     ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
@@ -140,6 +141,16 @@ in {
     enable = true;
     type = "ibus";
     ibus.engines = with pkgs.ibus-engines; [mozc];
+  };
+
+  systemd.user.services."ibus-wayland" = {
+    description = "IBus (Wayland) UI + daemon (start as child)";
+    wantedBy = ["default.target"];
+    serviceConfig = {
+      ExecStart = "${pkgs.coreutils}/bin/env -u GTK_IM_MODULE -u QT_IM_MODULE ${pkgs.ibus}/libexec/ibus-ui-gtk3 --enable-wayland-im --exec-daemon --daemon-args \"--xim --panel disable\"";
+      Restart = "on-failure";
+      RestartSec = "2s";
+    };
   };
 
   # This is additional config, for mapping CapsLock to "Eisu toggle" on the Japanese keyboard
