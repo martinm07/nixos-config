@@ -463,6 +463,8 @@ in {
     qalculate-gtk # Calculator (that is very cool)
     vlc # Video viewer/playback
     swayimg # Image viewer
+    grim # Screenshot tool- makes screenshot from given area
+    slurp # Allows to visually select area of screen (for grim)
 
     pwvucontrol # Small audio controller/manager application
     nwg-displays # Small display manager application
