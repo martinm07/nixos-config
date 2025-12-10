@@ -457,7 +457,6 @@ in {
     libnotify # Package that dunst depends on (TODO: Does SwayNC depend on it?)
     rofi # App launcher
     inputs.rose-pine-hyprcursor.packages.${pkgs.stdenv.hostPlatform.system}.default
-    paper-gtk-theme
 
     kdePackages.dolphin # File browser
     mate.pluma # Text editor
@@ -470,6 +469,8 @@ in {
     btop # System resources TUI
     networkmanagerapplet # Network manager
 
+    paper-gtk-theme
+    orchis-theme
     kdePackages.breeze-icons
 
     # --- --- --- --
