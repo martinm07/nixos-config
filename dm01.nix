@@ -274,6 +274,9 @@ in {
   # Configure console keymap
   console.keyMap = "uk";
 
+  # DBus service for allowing applications to query and manipulate storage devices (like Dolphin)
+  services.udisks2.enable = true;
+
   # https://nixos.wiki/wiki/Printing
   # Enable CUPS to print documents (NOTE: this allows printer management through http://localhost:631)
   services.printing.enable = true;
