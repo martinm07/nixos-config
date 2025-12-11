@@ -194,7 +194,8 @@ in {
     fontconfig = {
       defaultFonts = {
         sansSerif = ["Noto Sans CJK"];
-        serif = ["Noto Serif CJK"];
+        # serif = ["Noto Serif CJK"];
+        serif = ["Ubuntu Mono"];
         monospace = ["Ubuntu Mono"];
       };
     };

@@ -2,7 +2,7 @@ name = "bar"
 anchor_to_edges = true
 height = 42
 position = "bottom"
-icon_theme = "Breeze Dark"
+icon_theme = "Papirus-Dark"
 
 ### POWER MENU
 
@@ -207,12 +207,6 @@ cpu = 1
 temps = 5
 disks = 300
 networks = 3
-
-### NETWORK MANAGER (CURRENTLY SEEMINGLY DEFUNCT)
-
-[[end]]
-type = "network_manager"
-icon_size = 32
 
 ### VOLUME CONTROLS
 
