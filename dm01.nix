@@ -274,7 +274,11 @@ in {
   # Configure console keymap
   console.keyMap = "uk";
 
+  # Driver for Wacom Drawing Tablet, that should support emulating mouse input using the tablet, for certain applications that require it
   hardware.opentabletdriver.enable = true;
+  # Required by OpenTabletDriver
+  hardware.uinput.enable = true;
+  boot.kernelModules = ["uinput"];
 
   # DBus service for allowing applications to query and manipulate storage devices (like Dolphin)
   services.udisks2.enable = true;
