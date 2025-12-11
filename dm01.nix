@@ -147,14 +147,10 @@ in {
   };
 
   environment.variables = {
-    # Force GTK_IM_MODULE to be empty to prevent GTK apps from using IBus legacy code.
-    # They will auto-detect Wayland and use the text-input protocol instead.
-    GTK_IM_MODULE = lib.mkForce "";
-
-    # For QT, "wayland" is usually the best setting on Hyprland, provided you have
-    # qt5.qtwayland and qt6.qtwayland installed.
-    # If that causes issues, you can set this to "" (empty) as well.
-    QT_IM_MODULE = lib.mkForce "wayland";
+    ## It was necessary to "unset" these env variables for IBus to work somewhat.
+    ## Now we're using fcitx5 which is much better behaved, but it's useful to know how to unset env variables reliably (shown here with lib.mkForce and an empty string)
+    # GTK_IM_MODULE = lib.mkForce "";
+    # QT_IM_MODULE = lib.mkForce "wayland";
 
     # Keep XMODIFIERS set to ibus so XWayland apps (like Steam or old apps) still work.
     # The IBus module usually sets this automatically, but you can be explicit if you want.
@@ -470,10 +466,12 @@ in {
     nwg-displays # Small display manager application
     btop # System resources TUI
     networkmanagerapplet # Network manager
+    nwg-look # GTK theme manager
 
     paper-gtk-theme
     orchis-theme
     kdePackages.breeze-icons
+    papirus-icon-theme
 
     # --- --- --- --
     # --- GAMING ---
@@ -547,9 +545,8 @@ in {
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
     # Hint for electron apps to use wayland compositor
     NIXOS_OZONE_WL = "1";
-
-    # GTK_IM_MODULE = null;
-    # QT_IM_MODULE = null;
+    # Make Anki use Wayland (instead of XWayland, which has performance issus, freezing, not working with fictx5, sometimes completely freezes)
+    ANKI_WAYLAND = "1";
   };
 
   programs.git.enable = true;

@@ -2,6 +2,7 @@ name = "bar"
 anchor_to_edges = true
 height = 42
 position = "bottom"
+icon_theme = "Breeze Dark"
 
 ### POWER MENU
 
@@ -172,6 +173,14 @@ type = 'button'
 class = 'settings-btn'
 label = 'Display'
 on_click = '!nwg-displays'
+
+# GTK THEME MANAGER
+
+[[end.popup.widgets.widgets]]
+type = 'button'
+class = 'settings-btn'
+label = 'GTK Theme'
+on_click = '!nwg-look'
 
 # SYSTEM RESOURCES VIEW & MANAGER
 
