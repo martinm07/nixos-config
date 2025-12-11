@@ -185,7 +185,7 @@ in {
     enableDefaultPackages = true;
     packages = with pkgs; [
       noto-fonts-cjk-sans
-      noto-fonts-cjk-serif
+      noto-fonts-cjk-serif-static
       ubuntu-classic
       fira-code
       nerd-fonts.jetbrains-mono
@@ -194,8 +194,8 @@ in {
     fontconfig = {
       defaultFonts = {
         sansSerif = ["Noto Sans CJK"];
-        # serif = ["Noto Serif CJK"];
-        serif = ["Ubuntu Mono"];
+        serif = ["Noto Serif CJK"];
+        # serif = ["Ubuntu Mono"];
         monospace = ["Ubuntu Mono"];
       };
     };
