@@ -219,7 +219,7 @@ in {
   services.xserver.enable = true;
 
   # Enabling support for Wacom drawing tablet (model Intuos PTH-451)
-  services.xserver.wacom.enable = true;
+  # services.xserver.wacom.enable = true;
 
   # The "displayManager" refers to the lockscreen. LightDM is the default for NixOS
   services.displayManager.sddm = {
@@ -273,6 +273,8 @@ in {
 
   # Configure console keymap
   console.keyMap = "uk";
+
+  hardware.opentabletdriver.enable = true;
 
   # DBus service for allowing applications to query and manipulate storage devices (like Dolphin)
   services.udisks2.enable = true;
@@ -479,6 +481,7 @@ in {
     swayimg # Image viewer
     grim # Screenshot tool- makes screenshot from given area
     slurp # Allows to visually select area of screen (for grim)
+    wayscriber # Screen annotation tool
 
     pwvucontrol # Small audio controller/manager application
     nwg-displays # Small display manager application
