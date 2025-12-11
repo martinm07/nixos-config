@@ -218,7 +218,7 @@ in {
   # Enable the X11 windowing system (but also Wayland? See https://github.com/NixOS/nixpkgs/issues/94799)
   services.xserver.enable = true;
 
-  # Enabling support for Wacom drawing tablet (model Intuos PTH-451)
+  # Enabling support for Wacom drawing tablet (model Wacom PTH-451)
   # services.xserver.wacom.enable = true;
 
   # The "displayManager" refers to the lockscreen. LightDM is the default for NixOS
@@ -277,7 +277,7 @@ in {
   # Driver for Wacom Drawing Tablet, that should support emulating mouse input using the tablet, for certain applications that require it
   hardware.opentabletdriver.enable = true;
   # Required by OpenTabletDriver
-  hardware.uinput.enable = true;
+  hardware.uinput.enable = true; # "uinput makes it possible to emulate input devices from user space" (probably stands for "user input")
   boot.kernelModules = ["uinput"];
 
   # DBus service for allowing applications to query and manipulate storage devices (like Dolphin)
