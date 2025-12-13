@@ -1,0 +1,3 @@
+~/.config/hypr -> ~/.config/system/config/hypr
+~/.config/ironbar -> ~/.config/system/ironbar
+~/.zshrc -> ~/.config/system/zshrc
