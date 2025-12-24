@@ -476,7 +476,8 @@ in {
     swaynotificationcenter # SwayNC (notification manager that should also work with Hyprland)
     libnotify # Package that dunst depends on (TODO: Does SwayNC depend on it?)
     rofi # App launcher
-    inputs.rose-pine-hyprcursor.packages.${pkgs.stdenv.hostPlatform.system}.default
+    hyprsunset # Blue filter
+    hyprpolkitagent
 
     kdePackages.dolphin # File browser
     mate.pluma # Text editor
@@ -487,7 +488,6 @@ in {
     grim # Screenshot tool- makes screenshot from given area
     slurp # Allows to visually select area of screen (for grim)
     wayscriber # Screen annotation tool
-    hyprsunset # Blue filter
 
     pwvucontrol # Small audio controller/manager application
     nwg-displays # Small display manager application
@@ -495,6 +495,7 @@ in {
     networkmanagerapplet # Network manager
     nwg-look # GTK theme manager
 
+    inputs.rose-pine-hyprcursor.packages.${pkgs.stdenv.hostPlatform.system}.default
     paper-gtk-theme
     orchis-theme
     kdePackages.breeze-icons
