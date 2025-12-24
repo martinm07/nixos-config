@@ -466,6 +466,7 @@ in {
     uv
     nodejs
     baobab
+    gparted # Installing gparted as a "system app" rather than a "user app" may be important. Must research the difference
 
     # --- --- ---- ---
     # --- HYPRLAND ---
@@ -540,6 +541,7 @@ in {
     nixpkgsUnstable.legacyPackages.x86_64-linux.godot
     darktable
     zoom-us
+    fatsort # Main use-case is sorting MP3 files on USB flash drives for CD players
   ];
 
   programs.steam = {
