@@ -467,6 +467,7 @@ in {
     nodejs
     baobab
     gparted # Installing gparted as a "system app" rather than a "user app" may be important. Must research the difference
+    exfatprogs # Ability to operate on exFAT filesystems using gparted
 
     # --- --- ---- ---
     # --- HYPRLAND ---
