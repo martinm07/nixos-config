@@ -103,11 +103,11 @@ in {
       "spotify"
       "steam"
       "steam-unwrapped"
-      "ticktick"
       "obsidian"
       "google-chrome"
       "zoom-us"
       "zoom"
+      "osu-lazer-bin"
     ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
@@ -521,6 +521,7 @@ in {
     qbittorrent # For managing torrents (I find it the nicest and most feauture-complete; especially of value being the ability to "Force recheck")
     wineWowPackages.stable # support both 32-bit and 64-bit applications
     winetricks # for installing missing DLLs and other configuration
+    osu-lazer-bin
 
     # --- --- --- --- ---
     # --- CASUAL APPS ---
@@ -530,7 +531,6 @@ in {
     spotify
     naps2 # Scanning software
     libreoffice-fresh
-    ticktick
     nixpkgsUnstable.legacyPackages.x86_64-linux.super-productivity # Trialing this is an alternative to TickTick
     linkedApp # Trialing this to replace TickTick's habit log
     obsidian
