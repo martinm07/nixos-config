@@ -543,7 +543,7 @@ in {
     darktable
     zoom-us
     fatsort # Main use-case is sorting MP3 files on USB flash drives for CD players
-    amberol # Simplistic music player
+    tauon # Music player
     puddletag # For adding metadata ("tags") to MP3/audio files (like title, album, cover art, etc.), supporting automatic patterns from the filenames
   ];
 
