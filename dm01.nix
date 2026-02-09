@@ -375,6 +375,8 @@ in {
     package = pkgs.mysql84;
   };
 
+  virtualisation.waydroid.enable = true;
+
   # environment.pathsToLink = [ "/home/martinm/.local/share/gem/ruby" ];
   # environment.variables.PATH = ;
 
