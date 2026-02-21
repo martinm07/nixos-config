@@ -544,6 +544,7 @@ in {
     google-chrome # Mainly for NativShark, which is almost unusable on Firefox thanks to audio tracks sporatically not loading
     nixpkgsUnstable.legacyPackages.x86_64-linux.godot
     darktable
+    gimp # GNU Image Manipulation Program
     zoom-us
     fatsort # Main use-case is sorting MP3 files on USB flash drives for CD players
     tauon # Music player

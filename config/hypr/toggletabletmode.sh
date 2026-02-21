@@ -40,6 +40,11 @@ if [ -n "$NEW_MODE" ]; then
 
     # 4. Optional: Send a desktop notification (requires dunst or similar)
     if command -v notify-send &> /dev/null; then
-        notify-send -t 3000 "OpenTabletDriver" "$NOTIFICATION_TEXT"
+      notify-send \
+        -r 8132165 \
+        -u low \
+        -t 3000 \
+        -h boolean:transient:true \
+        "OpenTabletDriver" "$NOTIFICATION_TEXT"
     fi
 fi
