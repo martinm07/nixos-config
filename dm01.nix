@@ -94,6 +94,13 @@ in {
     };
   };
 
+  swapDevices = [
+    {
+      device = "/var/lib/swapfile";
+      size = 48 * 1024; # 48 GB
+    }
+  ];
+
   # networking.hostName = "nixos"; # Define your hostname
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -549,7 +556,7 @@ in {
     fatsort # Main use-case is sorting MP3 files on USB flash drives for CD players
     tauon # Music player
     puddletag # For adding metadata ("tags") to MP3/audio files (like title, album, cover art, etc.), supporting automatic patterns from the filenames
-    nixpkgsUnstable.legacyPackages.x86_64-linux.ollama-rocm
+    # nixpkgsUnstable.legacyPackages.x86_64-linux.ollama-rocm
   ];
 
   programs.steam = {
