@@ -498,7 +498,6 @@ in {
     mate.atril # Document viewing & printing
     grim # Screenshot tool- makes screenshot from given area
     slurp # Allows to visually select area of screen (for grim)
-    wayscriber # Screen annotation tool
 
     pwvucontrol # Small audio controller/manager application
     nwg-displays # Small display manager application
