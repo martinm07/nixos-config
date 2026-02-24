@@ -403,6 +403,7 @@ in {
     vulkan-tools # Provides 'vulkaninfo' and 'vkcube' commands
     libratbag # Handling my Logitech mouse
     piper # GUI for libratbag
+    flatpak-xdg-utils # Provides flatpak-spawn
 
     (writeShellScriptBin "nh-os-switch" ''
       set -euo pipefail
