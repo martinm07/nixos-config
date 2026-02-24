@@ -15,8 +15,6 @@
     };
     # Fixes the "Open with" menu not being populated/ Dolphin forgetting file associations with applications
     dolphin-overlay.url = "github:rumboon/dolphin-overlay";
-    # Screen annotation tool (using flake instead of nixpkgs entry for bleeding-edge version)
-    wayscriber.url = "github:devmobasa/wayscriber";
   };
 
   outputs = {
@@ -25,7 +23,6 @@
     nixpkgsUnstable,
     home-manager,
     dolphin-overlay,
-    wayscriber,
     ...
   } @ inputs: let
     hostname = "dm01";
@@ -42,8 +39,6 @@
           nixpkgs.overlays = [
             dolphin-overlay.overlays.default
           ];
-
-          environment.systemPackages = [wayscriber.packages.x86_64-linux.default];
         }
         # Import the previous configuration.nix we used,
         # so the old configuration file still takes effect
