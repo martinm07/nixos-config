@@ -4,7 +4,7 @@ default_color = [
     255,
     0,
 ]
-default_thickness = 5.0
+default_thickness = 3.461188677805753
 default_eraser_size = 12.0
 default_eraser_mode = "stroke"
 marker_opacity = 0.32
@@ -381,8 +381,8 @@ pressure_thickness_scale_step = 0.1
 
 [session]
 persist_transparent = true
-persist_whiteboard = false
-persist_blackboard = false
+persist_whiteboard = true
+persist_blackboard = true
 persist_history = true
 restore_tool_state = true
 autosave_enabled = true
