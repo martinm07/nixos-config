@@ -483,7 +483,7 @@ in {
     # --- HYPRLAND ---
     # --- --- ---- ---
 
-    ironbar # Status bar
+    nixpkgsUnstable.legacyPackages.x86_64-linux.ironbar # Status bar
     wpaperd # Wallpaper manager
     swaynotificationcenter # SwayNC (notification manager that should also work with Hyprland)
     libnotify # Package that dunst depends on (TODO: Does SwayNC depend on it?)
