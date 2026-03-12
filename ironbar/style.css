@@ -60,16 +60,33 @@ scale value {
 scale trough slider {
   color: purple;
   background-color: purple;
+
+  min-width: 14px;
+  min-height: 14px;
+  margin: -5px;
 }
 
 .popup-volume .slider slider {
   background-color: #c6988e;
-  border-radius: 15;
+  border-radius: 15px;
   border: 2px outset #c6988e;
   background-image: none;
+
+  /*min-width: 14px;
+  min-height: 14px;
+  margin: -5px;*/
 }
 .popup-volume .slider highlight {
   background: #5e2e40;
+}
+
+.settings .background contents,
+.power-menu .background contents,
+.music .background contents,
+.volume .background contents,
+.clock .background contents {
+  background-color: rgba(0, 0, 0, 0);
+  padding: 0;
 }
 
 /* -- clipboard -- */
@@ -116,6 +133,18 @@ scale trough slider {
   background-color: @color_border_active;
 }
 
+.calendar.view {
+  padding: 6px;
+  border-radius: 5px;
+}
+
+.day-number.today {
+  background-color: @color_border;
+  font-weight: bold;
+  border-radius: 15px;
+  font-style: normal;
+}
+
 /* notifications */
 
 .notifications .count {
@@ -156,13 +185,16 @@ scale trough slider {
   background-color: rgba(0, 0, 0, 0);
   margin-left: 10px;
 }
-.tray menu {
-  /*background-color: rgba(0, 0, 0, 0.7);*/
-  padding: 8px 0px;
+.tray button {
+  padding: 8px 2px;
 }
 /* Overrides the label text just for the tray */
 .tray label {
   color: black;
+}
+
+.tray .item {
+  padding-left: 6px;
 }
 
 menu menuitem label,
@@ -184,6 +216,15 @@ menu menuitem:hover {
   background-color: @color_bg;
 }
 
+.background contents .view {
+  background-color: @color_bg_dark;
+}
+.background contents .view button,
+.background contents .view label {
+  color: @color_text;
+  font-style: italic;
+}
+
 /* -- power -- */
 
 .popup-upower {
@@ -195,6 +236,10 @@ menu menuitem:hover {
 .workspaces .item.focused {
   box-shadow: inset 0px -3px;
   background-color: @color_bg_dark;
+}
+
+.workspaces .item {
+  min-width: 16px;
 }
 
 .workspaces .item:hover {
@@ -211,6 +256,10 @@ menu menuitem:hover {
 }
 
 /* -- music -- */
+.music {
+  padding: 0 16px;
+}
+
 .popup-music {
   background-color: @color_bg;
   /*min-width: 25em;*/
@@ -224,7 +273,7 @@ menu menuitem:hover {
 .popup-music .progress .slider slider,
 .popup-music .volume .slider slider {
   background-color: #c6988e;
-  border-radius: 15;
+  border-radius: 15px;
   border: 2px outset #c6988e;
   background-image: none;
 }
@@ -272,9 +321,10 @@ menu menuitem:hover {
 }
 .power-btn {
   padding: 0 50px;
+  /*padding-right: 50px;*/
 }
 .power-btn label {
-  padding-right: 10pt;
+  padding-right: 28pt;
   min-width: 40pt;
   font-size: 40pt;
 }
