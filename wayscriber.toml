@@ -1,10 +1,10 @@
 [drawing]
 default_color = [
-    0,
-    0,
     255,
+    0,
+    0,
 ]
-default_thickness = 6.165697718776227
+default_thickness = 6.908369573510338
 default_eraser_size = 12.0
 default_eraser_mode = "stroke"
 marker_opacity = 0.32
@@ -141,10 +141,10 @@ show_marker_opacity_section = false
 context_aware_ui = true
 show_preset_toasts = true
 show_tool_preview = false
-top_offset = 1562.37109375
-top_offset_y = 1304.84375
-side_offset = 2.03125
-side_offset_x = 2258.41796875
+top_offset = -284.90625
+top_offset_y = 1224.12109375
+side_offset = 190.796875
+side_offset_x = -20.53515625
 force_inline = false
 
 [ui.toolbar.mode_overrides.simple]

@@ -558,6 +558,7 @@ in {
     nixpkgsUnstable.legacyPackages.x86_64-linux.tauon # Music player
     puddletag # For adding metadata ("tags") to MP3/audio files (like title, album, cover art, etc.), supporting automatic patterns from the filenames
     nixpkgsUnstable.legacyPackages.x86_64-linux.ollama-rocm
+    obs-studio # OBS (screen recording)
   ];
 
   programs.steam = {
