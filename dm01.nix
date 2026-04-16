@@ -384,7 +384,7 @@ in {
 
   virtualisation.waydroid.enable = true;
 
-  # environment.pathsToLink = [ "/home/martinm/.local/share/gem/ruby" ];
+  environment.pathsToLink = ["$HOME/.local/bin"];
   # environment.variables.PATH = ;
 
   # List packages installed in system profile. To search, run:
