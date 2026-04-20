@@ -14,3 +14,5 @@ compinit
 # End of lines added by compinstall
 
 PS1="%F{#e2f9e0}[%* - %F{#6a7569}%D%F{#e2f9e0}] %B%~%b %% "
+
+export PATH="$HOME/.local/bin:$PATH"

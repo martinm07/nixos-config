@@ -384,9 +384,6 @@ in {
 
   virtualisation.waydroid.enable = true;
 
-  environment.pathsToLink = ["$HOME/.local/bin"];
-  # environment.variables.PATH = ;
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -490,6 +487,7 @@ in {
     rofi # App launcher
     hyprsunset # Blue filter
     hyprpolkitagent
+    wl-clipboard
 
     kdePackages.dolphin # File browser
     mate.pluma # Text editor
