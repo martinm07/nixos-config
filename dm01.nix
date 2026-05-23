@@ -351,7 +351,7 @@ in {
     isNormalUser = true;
     description = "Martin Molnar";
     # "lp" is a group for "scanner printers" (i.e. all-in-one printers) I believe
-    extraGroups = ["networkmanager" "wheel" "input" "docker" "scanner" "lp"];
+    extraGroups = ["networkmanager" "wheel" "input" "docker" "scanner" "lp" "video" "render"];
     packages = with pkgs; [
       thunderbird
     ];
@@ -555,7 +555,7 @@ in {
     fatsort # Main use-case is sorting MP3 files on USB flash drives for CD players
     nixpkgsUnstable.legacyPackages.x86_64-linux.tauon # Music player
     puddletag # For adding metadata ("tags") to MP3/audio files (like title, album, cover art, etc.), supporting automatic patterns from the filenames
-    nixpkgsUnstable.legacyPackages.x86_64-linux.ollama-rocm
+    # nixpkgsUnstable.legacyPackages.x86_64-linux.ollama-rocm
     obs-studio # OBS (screen recording)
   ];
 
@@ -578,9 +578,25 @@ in {
 
   # Creating a symlink for the ROCm HIP libraries where most applications expect them
   # https://nixos.wiki/wiki/AMD_GPU#HIP
-  systemd.tmpfiles.rules = [
-    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
-  ];
+  # systemd.tmpfiles.rules = [
+  #   "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+  # ];
+
+  # Enable the native Ollama background service
+  services.ollama = {
+    enable = true;
+
+    # Point the service directly to your unstable rocm-enabled package
+    package = nixpkgsUnstable.legacyPackages.x86_64-linux.ollama-rocm;
+
+    # Tell ROCm precisely what GPU architecture family to emulate for Tensile/rocBLAS matrix math
+    rocmOverrideGfx = "11.0.0";
+
+    # Ensure the service listens globally so external tools like Zed Agent can reach it
+    environmentVariables = {
+      OLLAMA_HOST = "0.0.0.0:11434";
+    };
+  };
 
   # LACT is a GUI interface for controlling amdgpu
   systemd.packages = with pkgs; [lact];
