@@ -594,9 +594,9 @@ in {
     rocmOverrideGfx = "11.0.0";
 
     # Ensure the service listens globally so external tools like Zed Agent can reach it
-    environmentVariables = {
-      OLLAMA_HOST = "0.0.0.0:11434";
-    };
+    # environmentVariables = {
+    #   OLLAMA_HOST = "0.0.0.0:11434";
+    # };
   };
 
   # LACT is a GUI interface for controlling amdgpu
