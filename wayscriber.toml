@@ -1,10 +1,10 @@
 [drawing]
 default_color = [
-    0,
-    0,
-    0,
+    255,
+    255,
+    255,
 ]
-default_thickness = 1.0
+default_thickness = 3.747875181200885
 default_eraser_size = 12.0
 default_eraser_mode = "stroke"
 marker_opacity = 0.32
