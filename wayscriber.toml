@@ -254,6 +254,7 @@ select_line_tool = []
 select_rect_tool = []
 select_ellipse_tool = []
 select_arrow_tool = []
+select_blur_tool = []
 select_highlight_tool = []
 toggle_highlight_tool = ["Ctrl+Alt+H"]
 increase_font_size = [
@@ -312,6 +313,8 @@ toggle_toolbar = [
     "F9",
 ]
 toggle_presenter_mode = ["Ctrl+Shift+M"]
+toggle_light_mode = ["Ctrl+Shift+L"]
+toggle_light_mode_drawing = []
 toggle_fill = []
 toggle_radial_menu = []
 toggle_selection_properties = ["Ctrl+Alt+P"]

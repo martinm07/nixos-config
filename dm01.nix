@@ -490,6 +490,7 @@ in {
     wl-clipboard
 
     kdePackages.dolphin # File browser
+    kdePackages.kfind # File search utility used by Dolphin
     mate.pluma # Text editor
     qalculate-gtk # Calculator (that is very cool)
     vlc # Video viewer/playback
@@ -585,7 +586,7 @@ in {
   # Enable the native Ollama background service
   services.ollama = {
     enable = true;
-    loadModels = [ "gemma4:26b" "gemma4:31b" ];
+    loadModels = ["gemma4:26b" "gemma4:31b"];
 
     # Point the service directly to your unstable rocm-enabled package
     package = nixpkgsUnstable.legacyPackages.x86_64-linux.ollama-rocm;
