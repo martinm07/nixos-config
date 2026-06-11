@@ -150,8 +150,8 @@ show_preset_toasts = true
 show_tool_preview = false
 top_offset = -300.0
 top_offset_y = 1310.1328125
-side_offset = 298.63671875
-side_offset_x = -24.0
+side_offset = 870.0
+side_offset_x = 2276.0
 force_inline = false
 
 [ui.toolbar.mode_overrides.simple]
