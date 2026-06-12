@@ -115,6 +115,7 @@ in {
       "zoom-us"
       "zoom"
       "osu-lazer-bin"
+      "transcribe"
     ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
@@ -559,6 +560,7 @@ in {
     # nixpkgsUnstable.legacyPackages.x86_64-linux.ollama-rocm
     obs-studio # OBS (screen recording)
     musescore # Music notation
+    transcribe # Music transcription
   ];
 
   programs.steam = {
