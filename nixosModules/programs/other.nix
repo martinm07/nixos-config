@@ -10,5 +10,6 @@
     anki-bin # Anki (Spaced Repetition flashcard software); `anki-bin` is more up-to-date than `anki`
     nixpkgsUnstable.legacyPackages.x86_64-linux.godot
     obs-studio # OBS (screen recording)
+    localsend
   ];
 }
