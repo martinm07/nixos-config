@@ -42,7 +42,8 @@
         }
         # Import the previous configuration.nix we used,
         # so the old configuration file still takes effect
-        ./${hostname}.nix
+        # ./${hostname}.nix
+        ./hosts/${hostname}/configuration.nix
 
         # home-manager.nixosModules.home-manager
         # {
