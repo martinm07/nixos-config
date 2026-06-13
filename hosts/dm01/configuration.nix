@@ -14,6 +14,17 @@
   myc.boot.enableSDDM = true;
   myc.boot.addHyprlandCustomDM = true;
 
+  myc.ai.enable = true;
+
+  myc.devices.enableLogitechMouse = true;
+  myc.devices.enableDrawingTablet = true;
+  myc.devices.enableLACT = true;
+  myc.devices.enableAMDGPU = true;
+
+  myc.gaming.enableWaydroid = true;
+  myc.gaming.enableNVTOPAMD = true;
+  # myc.gaming.enableNVTOPNvidia = true;
+
   ####################################
 
   nixpkgs.config.allowUnfreePredicate = pkg:
