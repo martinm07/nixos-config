@@ -65,11 +65,11 @@
     ### ESSENTIAL DESKTOP APPS
     kdePackages.dolphin # File browser
     kdePackages.kfind # File search utility used by Dolphin
-    mate.pluma # Text editor
+    pluma # Text editor
     qalculate-gtk # Calculator (that is very cool)
     vlc # Video viewer/playback
     swayimg # Image viewer
-    mate.atril # Document viewing & printing
+    atril # Document viewing & printing
     grim # Screenshot tool- makes screenshot from given area
     slurp # Allows to visually select area of screen (for grim)
     nixpkgsUnstable.legacyPackages.x86_64-linux.wayscriber # Screen annotation tool

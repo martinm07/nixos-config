@@ -60,7 +60,9 @@ in {
 
         mangohud # Provides a small HUD on games for monitoring FPS, system resources, etc.
         qbittorrent # For managing torrents (I find it the nicest and most feauture-complete; especially of value being the ability to "Force recheck")
-        wineWowPackages.stable # support both 32-bit and 64-bit applications
+        wineWow64Packages.stable # Wine build that supports both 32-bit and 64-bit applications
+        # wineWow64Packages.waylandFull # native Wayland support (unstable)
+        # wineWow64Packages.staging # Wine version with experimental features
         winetricks # for installing missing DLLs and other configuration
         osu-lazer-bin
         waydroid-helper
