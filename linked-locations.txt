@@ -1,3 +1,4 @@
 ~/.config/hypr -> ~/.config/system/config/hypr
-~/.config/ironbar -> ~/.config/system/ironbar
-~/.zshrc -> ~/.config/system/zshrc
+~/.config/ironbar -> ~/.config/system/config/ironbar
+~/.zshrc -> ~/.config/system/config/zshrc
+~/.config/wayscriber -> ~/.config/system/config/wayscriber
