@@ -3,11 +3,7 @@
 
   inputs = {
     nixpkgsUnstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
 
     rose-pine-hyprcursor = {
       url = "github:ndom91/rose-pine-hyprcursor";
@@ -21,7 +17,6 @@
     self,
     nixpkgs,
     nixpkgsUnstable,
-    home-manager,
     dolphin-overlay,
     ...
   } @ inputs: let
@@ -53,9 +48,9 @@
       modules = [
         {
           system.configurationRevision = self.rev or self.dirtyRev or null;
-          nixpkgs.overlays = [
-            dolphin-overlay.overlays.default
-          ];
+          # nixpkgs.overlays = [
+          #   dolphin-overlay.overlays.default
+          # ];
         }
 
         ./hosts/m02/configuration.nix

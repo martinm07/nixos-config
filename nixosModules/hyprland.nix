@@ -50,6 +50,9 @@
     hyprsunset # Blue filter
     hyprpolkitagent
     wl-clipboard
+    hypridle # Manage behaviour as computer is left idle
+    hyprlock # Screen lock (without booting back to the display mananger, which closes everything)
+    hyprshutdown # Shutdown UI and gracefully asks apps to exit
 
     ### ESSENTIAL CLI TOOLS
     wget
