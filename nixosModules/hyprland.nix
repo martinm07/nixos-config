@@ -47,6 +47,8 @@
     swaynotificationcenter # SwayNC (notification manager that should also work with Hyprland)
     libnotify # Package that dunst depends on (TODO: Does SwayNC depend on it?)
     rofi # App launcher
+    playerctl # API controller for the player
+    brightnessctl
     hyprsunset # Blue filter
     hyprpolkitagent
     wl-clipboard

@@ -33,7 +33,7 @@ with lib; let
       echo "ENV:" >> "$LOG"
       env >> "$LOG"
       echo "---- start Hyprland ----" >> "$LOG"
-      exec Hyprland --config "$HOME/.config/system/config/hypr/hyprland.conf" >> "$LOG" 2>&1
+      exec Hyprland --config "$HOME/.config/system/config/hypr/hyprland.lua" >> "$LOG" 2>&1
       EOS
       chmod +x $out/bin/hyprland-custom
 
