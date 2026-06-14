@@ -58,7 +58,8 @@
   };
 
   # Makes it so that swiping down scrolls up
-  services.libinput.touchpad.naturalScrolling = false;
+  services.libinput.touchpad.naturalScrolling = true;
+  services.libinput.mouse.naturalScrolling = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
