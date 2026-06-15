@@ -30,9 +30,9 @@
       modules = [
         {
           system.configurationRevision = self.rev or self.dirtyRev or null;
-          nixpkgs.overlays = [
-            dolphin-overlay.overlays.default
-          ];
+          # nixpkgs.overlays = [
+          #   dolphin-overlay.overlays.default
+          # ];
         }
 
         ./hosts/dm01/configuration.nix
