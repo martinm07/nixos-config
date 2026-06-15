@@ -8,7 +8,7 @@ icon_theme = "Papirus-Dark"
 
 [[start]]
 class = 'power-menu'
-tooltip = '''Up: {{30000:$HOME/.config/system/ironbar/uptime.sh | cut -d ' ' -f2-}}'''
+tooltip = '''Up: {{30000:$HOME/.config/system/config/ironbar/uptime.sh | cut -d ' ' -f2-}}'''
 type = 'custom'
 
 [[start.bar]]
@@ -59,7 +59,7 @@ class = 'power-btn-container'
 [[start.popup.widgets.widgets.widgets]]
 class = 'power-btn'
 label = ''''''
-on_click = '!shutdown now'
+on_click = "!hyprshutdown -t 'Shutting down...' --post-cmd 'shutdown -P 0'"
 type = 'button'
 
 [[start.popup.widgets.widgets.widgets]]
@@ -78,7 +78,7 @@ class = 'power-btn-container'
 [[start.popup.widgets.widgets.widgets]]
 class = 'power-btn'
 label = ''''''
-on_click = '!reboot'
+on_click = "!hyprshutdown -t 'Restarting...' --post-cmd 'reboot'"
 type = 'button'
 
 [[start.popup.widgets.widgets.widgets]]
@@ -90,7 +90,7 @@ justify = "center"
 # UPTIME DISPLAY
 
 [[start.popup.widgets]]
-label = '''Uptime: {{30000:$HOME/.config/system/ironbar/uptime.sh | cut -d ' ' -f2-}}'''
+label = '''Uptime: {{30000:$HOME/.config/system/config/ironbar/uptime.sh | cut -d ' ' -f2-}}'''
 name = 'uptime'
 type = 'label'
 
