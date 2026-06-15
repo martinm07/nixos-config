@@ -15,6 +15,10 @@ with lib; {
 
   config = mkMerge [
     {
+      environment.sessionVariables = {
+        NIXOS_HOST = config.myc.hostname;
+      };
+
       ### NETWORK
       ###########
 
