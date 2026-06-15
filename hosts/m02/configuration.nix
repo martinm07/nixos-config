@@ -17,6 +17,8 @@
   myc.boot.enableSDDM = true;
   myc.boot.addHyprlandCustomDM = true;
 
+  myc.essentials.enableBattery = true;
+
   myc.devices.enableLACT = true;
   myc.devices.enableNvidiaGPU = true;
 

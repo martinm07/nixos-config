@@ -5,11 +5,17 @@
   lib,
   ...
 }:
-with lib; {
+with lib; let
+  cfg = config.myc.essentials;
+in {
   options.myc = {
     hostname = mkOption {
       type = types.str;
       description = "Hostname for this machine.";
+    };
+
+    essentials = {
+      enableBattery = lib.mkEnableOption "Enables UPower, a DBus service for power management.";
     };
   };
 
@@ -72,5 +78,9 @@ with lib; {
       };
       services.blueman.enable = true;
     }
+
+    (mkIf cfg.enableBattery {
+      services.upower.enable = true;
+    })
   ];
 }

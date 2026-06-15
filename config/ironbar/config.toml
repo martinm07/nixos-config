@@ -233,6 +233,12 @@ length = 50
 type = "clock"
 format = "  %H:%M:%S %d/%m/%Y"
 
+### BATTERY
+
+[[end]]
+type = "battery"
+show_if = '[[ $NIXOS_HOST == "dm01" ]] && exit 1 || exit 0' # an exit-code 0 is treated as true. Any other exit code is false
+
 ### SYSTEM TRAY
 
 [[end]]
