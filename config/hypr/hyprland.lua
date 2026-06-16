@@ -358,6 +358,7 @@ hl.bind("CTRL + SHIFT + Print",
 
 -- Screen annotation (toggle wayscriber overlay)
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("pkill -SIGUSR1 wayscriber"))
+hl.bind(mainMod .. " + SHIFT + D", hl.dsp.exec_cmd("wayscriber --light-toggle"))
 
 -- Tablet mode toggle
 hl.bind(mainMod .. " + SHIFT + P",

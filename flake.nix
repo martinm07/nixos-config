@@ -11,6 +11,11 @@
     };
     # Fixes the "Open with" menu not being populated/ Dolphin forgetting file associations with applications
     dolphin-overlay.url = "github:rumboon/dolphin-overlay";
+
+    wayscriber = {
+      url = "github:devmobasa/wayscriber";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {

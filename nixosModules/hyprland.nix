@@ -72,7 +72,7 @@
     atril # Document viewing & printing
     grim # Screenshot tool- makes screenshot from given area
     slurp # Allows to visually select area of screen (for grim)
-    nixpkgsUnstable.legacyPackages.x86_64-linux.wayscriber # Screen annotation tool
+    # nixpkgsUnstable.legacyPackages.x86_64-linux.wayscriber # Screen annotation tool
 
     ### SETTINGS APPS
     pwvucontrol # Small audio controller/manager application
