@@ -11,5 +11,6 @@
     puddletag # For adding metadata ("tags") to MP3/audio files (like title, album, cover art, etc.), supporting automatic patterns from the filenames
     musescore # Music notation
     transcribe # Music transcription
+    carla # Audio mixer
   ];
 }
