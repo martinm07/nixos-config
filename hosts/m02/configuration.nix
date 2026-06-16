@@ -18,7 +18,8 @@
   myc.boot.addHyprlandCustomDM = true;
 
   myc.essentials.enableBattery = true;
-  myc.essentials.enableJACK = true;
+
+  myc.music.enableLiveAudioMixing = true;
 
   myc.devices.enableLACT = true;
   myc.devices.enableNvidiaGPU = true;

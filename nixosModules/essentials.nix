@@ -16,7 +16,6 @@ in {
 
     essentials = {
       enableBattery = lib.mkEnableOption "Enables UPower, a DBus service for power management.";
-      enableJACK = lib.mkEnableOption "Enables PipeWire JACK support";
     };
   };
 
@@ -82,8 +81,18 @@ in {
       services.upower.enable = true;
     })
 
-    (mkIf cfg.enableJACK {
-      services.pipewire.jack.enable = true;
+    (mkIf config.myc.audio.enableLiveAudioMixing {
+      services.pipewire = {
+        jack.enable = true;
+        extraConfig.pipewire."92-low-latency" = {
+          "context.properties" = {
+            "default.clock.rate" = 48000;
+            "default.clock.quantum" = 32;
+            "default.clock.min-quantum" = 32;
+            "default.clock.max-quantum" = 32;
+          };
+        };
+      };
     })
   ];
 }
