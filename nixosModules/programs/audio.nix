@@ -7,6 +7,16 @@
 }:
 with lib; let
   cfg = config.myc.audio;
+
+  patchedCarla = pkgs.carla.overrideAttrs (old: {
+    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [pkgs.patchelf];
+    postFixup =
+      (old.postFixup or "")
+      + ''
+        patchelf --add-rpath ${pkgs.lib.makeLibraryPath [pkgs.gtk2]} \
+          $out/lib/carla/carla-bridge-lv2-gtk2
+      '';
+  });
 in {
   options.myc.audio = {
     enableLiveAudioMixing = lib.mkEnableOption "Enables low latency audio mixing and installs certain packages (qpwgraph, carla, calf)";
@@ -27,8 +37,9 @@ in {
     (mkIf cfg.enableLiveAudioMixing {
       environment.systemPackages = with pkgs; [
         qpwgraph # Audio mixer
-        carla # Effects manager
+        # carla # Effects manager
         calf # Audio effect plugins (like 'wah')
+        patchedCarla
       ];
     })
   ];
