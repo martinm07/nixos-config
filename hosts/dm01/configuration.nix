@@ -21,6 +21,8 @@
   myc.devices.enableLACT = true;
   myc.devices.enableAMDGPU = true;
 
+  myc.audio.enableLiveAudioMixing = true;
+
   myc.gaming.enableWaydroid = true;
   myc.gaming.enableNVTOPAMD = true;
   # myc.gaming.enableNVTOPNvidia = true;
