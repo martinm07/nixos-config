@@ -16,6 +16,8 @@
 
   myc.ai.enable = true;
 
+  myc.jellyfin.enable = true;
+
   myc.devices.enableLogitechMouse = true;
   myc.devices.enableDrawingTablet = true;
   myc.devices.enableLACT = true;

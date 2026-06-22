@@ -11,6 +11,7 @@
     ./keyboard.nix
     ./nix.nix
     ./printing.nix
+    ./jellyfin.nix
 
     ./programs/audio.nix
     ./programs/browser.nix
