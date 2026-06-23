@@ -31,6 +31,8 @@
 
   ####################################
 
+  boot.kernelParams = ["pcie_aspm=off"];
+
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "discord"
