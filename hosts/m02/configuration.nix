@@ -19,7 +19,7 @@
 
   myc.essentials.enableBattery = true;
 
-  myc.music.enableLiveAudioMixing = true;
+  myc.audio.enableLiveAudioMixing = true;
 
   myc.devices.enableLACT = true;
   myc.devices.enableNvidiaGPU = true;
