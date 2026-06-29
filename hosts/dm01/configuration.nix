@@ -33,6 +33,12 @@
 
   boot.kernelParams = ["pcie_aspm=off"];
 
+  boot.extraModprobeConfig = ''
+    options iwlwifi power_save=0
+    options iwlmvm power_save=0
+    options iwlwifi uapsd_disable=1
+  '';
+
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "discord"
