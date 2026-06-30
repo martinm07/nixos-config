@@ -31,6 +31,8 @@
 
   ####################################
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   boot.kernelParams = ["pcie_aspm=off"];
 
   boot.extraModprobeConfig = ''
