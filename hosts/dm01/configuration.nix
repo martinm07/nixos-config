@@ -41,6 +41,8 @@
     options iwlwifi uapsd_disable=1
   '';
 
+  # networking.interfaces.
+
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "discord"
