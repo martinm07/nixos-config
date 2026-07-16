@@ -13,6 +13,14 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-PS1="%F{#e2f9e0}[%* - %F{#6a7569}%D%F{#e2f9e0}] %B%~%b %% "
+if [[ -n "$IN_NIX_SHELL" ]]; then
+  NIX_PATH_COLOR="#5fc10f"
+else
+  NIX_PATH_COLOR="#e2f9e0"
+fi
+
+PS1="%F{#e2f9e0}[%* - %F{#6a7569}%D%F{#e2f9e0}] %B%F{$NIX_PATH_COLOR}%~%b %% %f"
 
 export PATH="$HOME/.local/bin:$PATH"
+
+alias nix-shell='nix-shell --command "exec zsh"'

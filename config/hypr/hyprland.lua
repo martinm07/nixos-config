@@ -457,6 +457,14 @@ hl.window_rule({
   size     = "1000 800",
 })
 
+-- Daily You
+hl.window_rule({
+  name = "daily-you-window",
+  match = { class = "daily_you" },
+  float = true,
+  size = { "(monitor_w*0.25)", "(monitor_h*0.9)" }
+})
+
 -------------
 
 -- Hyprland-run windowrule
