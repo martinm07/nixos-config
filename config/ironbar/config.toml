@@ -59,7 +59,7 @@ class = 'power-btn-container'
 [[start.popup.widgets.widgets.widgets]]
 class = 'power-btn'
 label = ''''''
-on_click = "!hyprshutdown -t 'Shutting down...' --post-cmd 'shutdown now' -P 0 > /tmp/hyprshutdown.log 2>&1"
+on_click = "!hyprshutdown -t 'Shutting down...' --post-cmd 'shutdown now' > /tmp/hyprshutdown.log 2>&1"
 type = 'button'
 
 [[start.popup.widgets.widgets.widgets]]

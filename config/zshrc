@@ -10,6 +10,9 @@ bindkey -v
 zstyle :compinstall filename '/home/martinm/.zshrc'
 
 autoload -Uz compinit
+# https://blog.smittytone.net/2021/04/03/how-to-use-zmv-z-shell-super-smart-file-renamer/
+# https://www.linuxjournal.com/content/bash-extended-globbing
+autoload zmv
 compinit
 # End of lines added by compinstall
 
