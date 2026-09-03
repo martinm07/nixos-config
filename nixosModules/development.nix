@@ -54,6 +54,7 @@
   services.xserver.excludePackages = [pkgs.xterm];
 
   programs.git.enable = true;
+  programs.git.lfs.enable = true;
   programs.git.config = {
     user.name = "martinm07";
     user.email = "martin.github07@gmail.com";
