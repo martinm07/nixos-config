@@ -40,6 +40,9 @@
   # DBus service for allowing applications to query and manipulate storage devices (like Dolphin)
   services.udisks2.enable = true;
 
+  # Authentication agent (allowing, with permission, non-privileged processes to communicate with privileged ones)
+  security.polkit.enable = true;
+
   environment.systemPackages = with pkgs; [
     ### ESSENTIAL DESKTOP FEATURES
     nixpkgsUnstable.legacyPackages.x86_64-linux.ironbar # Status bar
