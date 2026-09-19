@@ -37,5 +37,10 @@ in {
         # };
       };
     })
+
+    {
+      # Bubblewrap (bwrap) is used by Zed for basic agent sandboxing
+      environment.systemPackages = with pkgs; [bubblewrap];
+    }
   ];
 }
