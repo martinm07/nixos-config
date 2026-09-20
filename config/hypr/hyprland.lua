@@ -30,6 +30,9 @@ hl.monitor({
 -- })
 
 
+-- Add programatically generated config setting an env variable
+require("gpu")
+
 ---------------------
 ---- MY PROGRAMS ----
 ---------------------
