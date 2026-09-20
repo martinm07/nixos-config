@@ -19,11 +19,17 @@ in {
     })
 
     (mkIf cfg.enableNVTOPAMD {
-      environment.systemPackages = with pkgs; [nvtopPackages.amd];
+      environment.systemPackages = with pkgs; [
+        nvtopPackages.amd
+        amdgpu_top
+      ];
     })
 
     (mkIf cfg.enableNVTOPNvidia {
-      environment.systemPackages = with pkgs; [nvtopPackages.nvidia];
+      environment.systemPackages = with pkgs; [
+        nvtopPackages.nvidia
+        nvidia-smi
+      ];
     })
 
     {

@@ -41,36 +41,85 @@ in {
     })
 
     (mkIf cfg.enableLLamaCpp {
-      # services.llama-cpp = {
-      #   enable = true;
-      #   # package = pkgs.llama-cpp-vulkan;
-      #   # package = (pkgs.llama-cpp.override { cudaSupport = true; })
-      #   package = pkgs.llama-cpp-rocm;
+      services.llama-cpp = {
+        enable = true;
+        # package = pkgs.llama-cpp-vulkan;
+        # package = (pkgs.llama-cpp.override { cudaSupport = true; })
+        package = nixpkgsUnstable.legacyPackages.x86_64-linux.llama-cpp-rocm;
 
-      #   # Takes care of downloading if model not present
-      #   modelsPreset = {
-      #     # # Requires 8GB VRAM
-      #     # "LFM2.5-8B-A1B" = {
-      #     #   hf-repo = "unsloth/LFM2.5-8B-A1B-GGUF";
-      #     #   hf-file = "LFM2.5-8B-A1B-UD-Q4_K_XL.gguf";
-      #     #   alias = "unsloth/LFM2.5-8B-A1B-GGUF";
-      #     #   temp = "0.2";
-      #     #   repeat-penalty = "1.05";
-      #     #   top-k = "80";
-      #     # };
-      #     # # Requires 56GB VRAM
-      #     # "Qwen3-Coder-Next" = {
-      #     #   hf-repo = "unsloth/Qwen3-Coder-Next-GGUF";
-      #     #   hf-file = "Qwen3-Coder-Next-UD-Q4_K_XL.gguf";
-      #     #   alias = "unsloth/Qwen3-Coder-Next";
-      #     #   temp = "1.0";
-      #     #   top-p = "0.95";
-      #     #   top-k = "40";
-      #     # };
-      #   };
-      # };
+        extraFlags = [
+          "--ctx-size"
+          "100000"
+          "--n-gpu-layers"
+          "all"
+          "--parallel"
+          "1"
+          # Flash attention is an "algorithm to make training/inference faster" (default 'auto')
+          "--flash-attn"
+          "on"
+          # Data type for the KV cache (default 'f16')
+          "--cache-type-k"
+          "q8_0"
+          # Physics maximum batch size (buffer during inference; lower to save VRAM) (default '512')
+          "--ubatch-size"
+          "512"
+          # Whether to use Jinja templating
+          "--jinja"
 
-      environment.systemPackages = [nixpkgsUnstable.legacyPackages.x86_64-linux.pkgs.llama-cpp-rocm];
+          "-dev"
+          "ROCm0"
+        ];
+
+        # Takes care of downloading if model not present
+        modelsPreset = {
+          # # Requires 8GB VRAM
+          # "LFM2.5-8B-A1B" = {
+          #   hf-repo = "unsloth/LFM2.5-8B-A1B-GGUF";
+          #   hf-file = "LFM2.5-8B-A1B-UD-Q4_K_XL.gguf";
+          #   alias = "unsloth/LFM2.5-8B-A1B-GGUF";
+          #   temp = "0.2";
+          #   repeat-penalty = "1.05";
+          #   top-k = "80";
+          # };
+          # # Requires 56GB VRAM
+          # "Qwen3-Coder-Next" = {
+          #   hf-repo = "unsloth/Qwen3-Coder-Next-GGUF";
+          #   hf-file = "Qwen3-Coder-Next-UD-Q4_K_XL.gguf";
+          #   alias = "unsloth/Qwen3-Coder-Next";
+          #   temp = "1.0";
+          #   top-p = "0.95";
+          #   top-k = "40";
+          # };
+          # "Qwen3.8-27B-(DavidAU)" = {
+          #   hf-repo = "DavidAU/Qwen3.8-27B-TURBO-Fable-Cold-Fusion-735-882-Heretic-Uncensored-NEO-CODER-MAX-MTP-GGUF";
+          #   hf-file = "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M.gguf";
+          #   alias="DavidAU/Qwen3.8-27B-(DavidAU)";
+
+          # };
+
+          "Qwen3.8-27B" = {
+            hf-repo = "unsloth/Qwen3.8-27B-GGUF";
+            hf-file = "Qwen3.8-27B-UD-Q4_K_M.gguf";
+            alias = "unsloth/Qwen3.8-27B";
+
+            ctx-size = 100000;
+
+            temp = 1.0;
+            top-p = 0.95;
+            top-k = 20;
+            min-p = 0.0;
+            # Default (other options are "medium" and "low"; https://unsloth.ai/docs/models/qwen3.8#thinking--preserve-thinking)
+            # chat-template-kwargs = {
+            #   reasoning_effort = "xhigh";
+            #   preserve_thinking = true;
+            # };
+
+            chat-template-kwargs = ''{"reasoning_effort": "xhigh", "preserve_thinking": true}'';
+          };
+        };
+      };
+
+      # environment.systemPackages = [nixpkgsUnstable.legacyPackages.x86_64-linux.pkgs.llama-cpp-rocm];
     })
 
     (mkIf cfg.iGPUDisplay {

@@ -14,7 +14,6 @@
   myc.boot.enableSDDM = true;
   myc.boot.addHyprlandCustomDM = true;
 
-  myc.ai.enableOllama = true;
   myc.ai.enableLLamaCpp = true;
   myc.ai.iGPUDisplay = true;
 
@@ -29,7 +28,6 @@
 
   myc.gaming.enableWaydroid = true;
   myc.gaming.enableNVTOPAMD = true;
-  # myc.gaming.enableNVTOPNvidia = true;
 
   ####################################
 
