@@ -74,7 +74,7 @@ in {
           "--no-mmproj"
 
           "-dev"
-          "ROCm0"
+          "Vulkan1"
 
           "-sm"
           "none"
@@ -129,7 +129,7 @@ in {
         };
       };
 
-      # environment.systemPackages = [nixpkgsUnstable.legacyPackages.x86_64-linux.pkgs.llama-cpp-rocm];
+      environment.systemPackages = [nixpkgsUnstable.legacyPackages.x86_64-linux.pkgs.llama-cpp-vulkan];
     })
 
     (mkIf cfg.iGPUDisplay {
