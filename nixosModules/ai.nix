@@ -45,13 +45,15 @@ in {
         enable = true;
         # package = pkgs.llama-cpp-vulkan;
         # package = (pkgs.llama-cpp.override { cudaSupport = true; })
-        package = nixpkgsUnstable.legacyPackages.x86_64-linux.llama-cpp-rocm;
+        package = nixpkgsUnstable.legacyPackages.x86_64-linux.llama-cpp-vulkan;
 
         extraFlags = [
           "--ctx-size"
           "100000"
+
           "--n-gpu-layers"
-          "all"
+          "99"
+
           "--parallel"
           "1"
           # Flash attention is an "algorithm to make training/inference faster" (default 'auto')
@@ -60,14 +62,22 @@ in {
           # Data type for the KV cache (default 'f16')
           "--cache-type-k"
           "q8_0"
+
+          "--cache-type-v"
+          "q8_0"
           # Physics maximum batch size (buffer during inference; lower to save VRAM) (default '512')
           "--ubatch-size"
           "512"
           # Whether to use Jinja templating
           "--jinja"
 
+          "--no-mmproj"
+
           "-dev"
           "ROCm0"
+
+          "-sm"
+          "none"
         ];
 
         # Takes care of downloading if model not present
