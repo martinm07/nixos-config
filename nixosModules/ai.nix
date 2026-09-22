@@ -49,7 +49,7 @@ in {
 
         extraFlags = [
           "--ctx-size"
-          "100000"
+          "135000"
 
           "--n-gpu-layers"
           "99"
@@ -112,7 +112,7 @@ in {
             hf-file = "Qwen3.8-27B-UD-Q4_K_M.gguf";
             alias = "unsloth/Qwen3.8-27B";
 
-            ctx-size = 100000;
+            ctx-size = 135000;
 
             temp = 1.0;
             top-p = 0.95;
