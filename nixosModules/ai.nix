@@ -123,25 +123,25 @@ in {
             min-p = 0.0;
           };
 
-          "Qwen3.8-27B" = {
-            hf-repo = "unsloth/Qwen3.8-27B-GGUF";
-            hf-file = "Qwen3.8-27B-UD-Q4_K_M.gguf";
-            alias = "unsloth/Qwen3.8-27B";
+          # "Qwen3.8-27B" = {
+          #   hf-repo = "unsloth/Qwen3.8-27B-GGUF";
+          #   hf-file = "Qwen3.8-27B-UD-Q4_K_M.gguf";
+          #   alias = "unsloth/Qwen3.8-27B";
 
-            # ctx-size = 135000;
+          #   # ctx-size = 135000;
 
-            temp = 1.0;
-            top-p = 0.95;
-            top-k = 20;
-            min-p = 0.0;
-            # Default (other options are "medium" and "low"; https://unsloth.ai/docs/models/qwen3.8#thinking--preserve-thinking)
-            # chat-template-kwargs = {
-            #   reasoning_effort = "xhigh";
-            #   preserve_thinking = true;
-            # };
+          #   temp = 1.0;
+          #   top-p = 0.95;
+          #   top-k = 20;
+          #   min-p = 0.0;
+          #   # Default (other options are "medium" and "low"; https://unsloth.ai/docs/models/qwen3.8#thinking--preserve-thinking)
+          #   # chat-template-kwargs = {
+          #   #   reasoning_effort = "xhigh";
+          #   #   preserve_thinking = true;
+          #   # };
 
-            chat-template-kwargs = ''{"reasoning_effort": "xhigh", "preserve_thinking": true}'';
-          };
+          #   chat-template-kwargs = ''{"reasoning_effort": "xhigh", "preserve_thinking": true}'';
+          # };
         };
       };
 
