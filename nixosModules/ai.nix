@@ -48,14 +48,17 @@ in {
         package = nixpkgsUnstable.legacyPackages.x86_64-linux.llama-cpp-vulkan;
 
         extraFlags = [
+          # 262144 / 2 = 131071 (2^17) i.e. 128k token window size per slot, given there are two slots (--parallel 2)
           "--ctx-size"
-          "135000"
+          "262144"
 
           "--n-gpu-layers"
           "99"
 
+          "--no-kv-unified"
+
           "--parallel"
-          "1"
+          "2"
           # Flash attention is an "algorithm to make training/inference faster" (default 'auto')
           "--flash-attn"
           "on"
@@ -107,12 +110,25 @@ in {
 
           # };
 
+          "Swift-1.5-Qwen3.8-27B" = {
+            hf-repo = "ukisai/Swift-1.5-Qwen3.8-27B-GSQ-RCO-GGUF";
+            hf-file = "Swift-1.5-Qwen3.8-27B-GSQ-RCO-IQ3_S-mtp.gguf";
+            alias = "ukisai/Qwen3.8-27B";
+
+            # ctx-size = 135000;
+
+            temp = 1.0;
+            top-p = 0.95;
+            top-k = 20;
+            min-p = 0.0;
+          };
+
           "Qwen3.8-27B" = {
             hf-repo = "unsloth/Qwen3.8-27B-GGUF";
             hf-file = "Qwen3.8-27B-UD-Q4_K_M.gguf";
             alias = "unsloth/Qwen3.8-27B";
 
-            ctx-size = 135000;
+            # ctx-size = 135000;
 
             temp = 1.0;
             top-p = 0.95;
