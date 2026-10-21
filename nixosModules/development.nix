@@ -49,6 +49,9 @@
     ))
     uv
     nodejs
+
+    jujutsu
+    gg-jj
   ];
 
   services.xserver.excludePackages = [pkgs.xterm];
