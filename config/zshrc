@@ -10,11 +10,17 @@ bindkey -v
 zstyle :compinstall filename '/home/martinm/.zshrc'
 
 autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
 # https://blog.smittytone.net/2021/04/03/how-to-use-zmv-z-shell-super-smart-file-renamer/
 # https://www.linuxjournal.com/content/bash-extended-globbing
 autoload zmv
-compinit
-# End of lines added by compinstall
+
+# Execute script provided by jj to give dynamic (context-aware) completions in zsh (https://docs.jj-vcs.dev/latest/install-and-setup/#standard_1)
+# Note that `source` takes a filepath and executes it as part of the shell script (standard bash/zsh command), and the <(...) is 'process substitution';
+#  essentially taking the text from the command inside, putting it an a temporary file and substituting the filepath to that temporary file.
+source <(jj util completion zsh)
 
 if [[ -n "$IN_NIX_SHELL" ]]; then
   NIX_PATH_COLOR="#5fc10f"

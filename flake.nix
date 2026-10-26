@@ -16,6 +16,11 @@
       url = "github:devmobasa/wayscriber";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hunk = {
+      url = "github:modem-dev/hunk";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {

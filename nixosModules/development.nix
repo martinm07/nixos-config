@@ -2,9 +2,18 @@
   config,
   pkgs,
   nixpkgsUnstable,
+  inputs,
   ...
 }: {
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    syntaxHighlighting.enable = true;
+
+    shellAliases = {
+      ls = "eza";
+    };
+  };
   programs.zsh.ohMyZsh = {
     enable = true;
     # plugins = [];
@@ -49,9 +58,10 @@
     ))
     uv
     nodejs
+    deno # Deno is useful for having native TS support for writing basic scripts in TS (which I'm more used to compared to Python, for instance).
 
     jujutsu
-    gg-jj
+    inputs.hunk.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   services.xserver.excludePackages = [pkgs.xterm];
