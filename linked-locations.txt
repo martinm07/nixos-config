@@ -3,3 +3,5 @@
 ~/.config/ironbar -> ~/.config/system/config/ironbar
 ~/.zshrc -> ~/.config/system/config/zshrc
 ~/.config/wayscriber -> ~/.config/system/config/wayscriber
+~/.config/kitty -> ~/.config/system/config/kitty
+~/.config/jj/config.toml -> ~/.config/system/config/jjconfig.toml

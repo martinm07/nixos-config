@@ -1,0 +1,9 @@
+#:schema https://docs.jj-vcs.dev/latest/config-schema.json
+
+[user]
+name = "martinm07"
+email = "martin.github07@gmail.com"
+
+[ui]
+pager = ["hunk", "pager"]
+diff-formatter = ":git"
