@@ -13,6 +13,7 @@ in {
     enableLACT = lib.mkEnableOption "Enables LACT, a GUI for controlling GPUs";
     enableAMDGPU = lib.mkEnableOption "Configures system to load amdgpu driver";
     enableNvidiaGPU = lib.mkEnableOption "Configures system to load nvidia driver";
+    enableOpenRGB = lib.mkEnableOption "Adds OpenRGB to the system";
   };
 
   config = mkMerge [
@@ -112,6 +113,11 @@ in {
           enableOffloadCmd = true;
         };
       };
+    })
+
+    (mkIf cfg.enableOpenRGB {
+      services.hardware.openrgb.enable = true;
+      environment.systemPackages = [pkgs.openrgb];
     })
   ];
 }

@@ -23,10 +23,8 @@
   myc.devices.enableDrawingTablet = true;
   myc.devices.enableLACT = true;
   myc.devices.enableAMDGPU = true;
+  myc.devices.enableOpenRGB = true;
 
-  myc.audio.enableLiveAudioMixing = true;
-
-  myc.gaming.enableWaydroid = true;
   myc.gaming.enableNVTOPAMD = true;
 
   ####################################
