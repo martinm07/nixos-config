@@ -365,15 +365,16 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1793522443,
-        "narHash": "sha256-tD5gKmXaxJ1rxIapxBFt7bTHJ1DC9BzNbxqXyiYaJYM=",
+        "lastModified": 1793092458,
+        "narHash": "sha256-Tgx93GWEcmszXzAwRQj6GuFJ3GJaWPG9huVLs3i7vuE=",
         "owner": "devmobasa",
         "repo": "wayscriber",
-        "rev": "3ef723f7c5a26eaeed1027fc0d7b53e2ca176c44",
+        "rev": "283c90a562cce632351d97612952cfb7b922703f",
         "type": "github"
       },
       "original": {
         "owner": "devmobasa",
+        "ref": "v0.9.28",
         "repo": "wayscriber",
         "type": "github"
       }

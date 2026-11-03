@@ -13,7 +13,7 @@
     dolphin-overlay.url = "github:MattiDragon/dolphin-overlay";
 
     wayscriber = {
-      url = "github:devmobasa/wayscriber";
+      url = "github:devmobasa/wayscriber?ref=v0.9.28";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
