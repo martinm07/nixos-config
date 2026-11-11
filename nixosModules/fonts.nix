@@ -12,6 +12,9 @@
       ubuntu-classic
       fira-code
       nerd-fonts.jetbrains-mono
+      merriweather
+      merriweather-sans
+      liberation_ttf
     ];
 
     fontconfig = {
