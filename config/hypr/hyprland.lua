@@ -360,7 +360,7 @@ hl.bind("CTRL + SHIFT + Print",
   hl.dsp.exec_cmd([[grim -g "$(slurp)" - | wl-copy]]))
 
 -- Screen annotation (toggle wayscriber overlay)
-hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("pkill -SIGUSR1 wayscriber"))
+hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("wayscriber --daemon-toggle"))
 hl.bind(mainMod .. " + SHIFT + D", hl.dsp.exec_cmd("wayscriber --light-toggle"))
 
 -- Tablet mode toggle
