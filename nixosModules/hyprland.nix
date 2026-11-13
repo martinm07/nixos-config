@@ -32,6 +32,12 @@
     xwayland.enable = true;
   };
 
+  qt = {
+    enable = true;
+    style = "breeze";
+    platformTheme = "kde";
+  };
+
   # Allows applications to interact with the Desktop Environment
   #  (e.g. screen sharing, file sharing, file opening, etc.)
   xdg.portal.enable = true;
