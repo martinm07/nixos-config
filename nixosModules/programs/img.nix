@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  nixpkgsUnstable,
   inputs,
   ...
 }: {
@@ -8,7 +9,7 @@
     naps2 # Scanning software
     darktable
     gimp # GNU Image Manipulation Program
-    krita
+    nixpkgsUnstable.legacyPackages.x86_64-linux.krita
     inputs.wayscriber.packages.${pkgs.stdenv.hostPlatform.system}.default # I imagine pkgs.system is the "x86_64-linux" string, like in nixpkgsUnstable declarations.
     inputs.wayscriber.packages.${pkgs.stdenv.hostPlatform.system}.wayscriber-configurator
   ];
