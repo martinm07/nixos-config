@@ -44,6 +44,26 @@ tab_drag_tool = "default"
 [presets]
 slot_count = 5
 
+[presets.slot_1]
+tool = "pen"
+color = [
+    36,
+    31,
+    49,
+]
+size = 5.602685587853818
+eraser_kind = "Circle"
+eraser_mode = "stroke"
+marker_opacity = 0.32
+fill_enabled = false
+font_size = 32.0
+text_background_enabled = false
+arrow_length = 20.0
+arrow_angle = 30.0
+arrow_head_at_end = true
+polygon_sides = 5
+show_status_bar = true
+
 [history]
 undo_all_delay_ms = 1000
 redo_all_delay_ms = 1000
@@ -53,16 +73,35 @@ custom_redo_delay_ms = 1000
 custom_undo_steps = 5
 custom_redo_steps = 5
 
+[presets.slot_1.tool_settings]
+eraser_size = 12.0
+
 [arrow]
 length = 20.0
 angle_degrees = 30.0
 head_at_end = true
+
+[presets.slot_1.tool_settings.pen]
+color = [
+    36,
+    31,
+    49,
+]
+size = 5.602685587853818
 
 [performance]
 buffer_count = 3
 enable_vsync = true
 max_fps_no_vsync = 60
 ui_animation_fps = 30
+
+[presets.slot_1.tool_settings.line]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
 
 [ui]
 show_status_bar = true
@@ -80,6 +119,14 @@ xdg_fullscreen = false
 xdg_focus_loss_behavior = "exit"
 radial_menu_mouse_binding = "middle"
 
+[presets.slot_1.tool_settings.rect]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
+
 [ui.status_bar_style]
 font_size = 21.0
 padding = 15.0
@@ -96,6 +143,14 @@ text_color = [
     1.0,
 ]
 dot_radius = 6.0
+
+[presets.slot_1.tool_settings.ellipse]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
 
 [ui.help_overlay_style]
 font_size = 14.0
@@ -122,6 +177,34 @@ text_color = [
     1.0,
 ]
 
+[presets.slot_1.tool_settings.arrow]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
+
+[presets.slot_2]
+tool = "pen"
+color = [
+    36,
+    31,
+    49,
+]
+size = 5.602685587853818
+eraser_kind = "Circle"
+eraser_mode = "stroke"
+marker_opacity = 0.32
+fill_enabled = false
+font_size = 32.0
+text_background_enabled = false
+arrow_length = 20.0
+arrow_angle = 30.0
+arrow_head_at_end = true
+polygon_sides = 5
+show_status_bar = true
+
 [ui.click_highlight]
 enabled = false
 show_on_highlight_tool = false
@@ -143,8 +226,51 @@ outline_color = [
 use_pen_color = true
 force_in_light_mode = true
 
+[presets.slot_1.tool_settings.blur]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
+
+[presets.slot_2.tool_settings]
+eraser_size = 12.0
+
+[presets.slot_2.tool_settings.pen]
+color = [
+    36,
+    31,
+    49,
+]
+size = 5.602685587853818
+
 [ui.context_menu]
 enabled = true
+
+[presets.slot_1.tool_settings.marker]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
+
+[presets.slot_2.tool_settings.line]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
+
+[presets.slot_2.tool_settings.rect]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
 
 [ui.toolbar]
 layout_mode = "regular"
@@ -173,11 +299,425 @@ side_offset = -8.605906249999975
 side_offset_x = -8.3005
 force_inline = false
 
+[presets.slot_1.tool_settings.step_marker]
+color = [
+    255,
+    0,
+    0,
+]
+size = 19.2
+
+[presets.slot_2.tool_settings.ellipse]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
+
+[presets.slot_2.tool_settings.arrow]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
+
+[presets.slot_3]
+tool = "pen"
+color = [
+    36,
+    31,
+    49,
+]
+size = 5.602685587853818
+eraser_kind = "Circle"
+eraser_mode = "stroke"
+marker_opacity = 0.32
+fill_enabled = false
+font_size = 32.0
+text_background_enabled = false
+arrow_length = 20.0
+arrow_angle = 30.0
+arrow_head_at_end = true
+polygon_sides = 5
+show_status_bar = true
+
 [ui.toolbar.mode_overrides.simple]
+
+[presets.slot_1.drag_tools.left]
+drag_tool = "pen"
+shift_drag_tool = "line"
+ctrl_drag_tool = "rect"
+ctrl_shift_drag_tool = "arrow"
+tab_drag_tool = "ellipse"
+
+[presets.slot_3.tool_settings]
+eraser_size = 12.0
+
+[presets.slot_2.tool_settings.blur]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
+
+[presets.slot_3.tool_settings.pen]
+color = [
+    36,
+    31,
+    49,
+]
+size = 5.602685587853818
+
+[presets.slot_2.tool_settings.marker]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
+
+[presets.slot_3.tool_settings.line]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
+
+[presets.slot_3.tool_settings.rect]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
 
 [ui.toolbar.mode_overrides.regular]
 
+[presets.slot_1.drag_tools.right]
+drag_tool = "default"
+shift_drag_tool = "default"
+ctrl_drag_tool = "default"
+ctrl_shift_drag_tool = "default"
+tab_drag_tool = "default"
+
+[presets.slot_3.tool_settings.ellipse]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
+
+[presets.slot_2.tool_settings.step_marker]
+color = [
+    255,
+    0,
+    0,
+]
+size = 19.2
+
+[presets.slot_3.tool_settings.arrow]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
+
+[presets.slot_4]
+tool = "pen"
+color = [
+    36,
+    31,
+    49,
+]
+size = 5.602685587853818
+eraser_kind = "Circle"
+eraser_mode = "stroke"
+marker_opacity = 0.32
+fill_enabled = false
+font_size = 32.0
+text_background_enabled = false
+arrow_length = 20.0
+arrow_angle = 30.0
+arrow_head_at_end = true
+polygon_sides = 5
+show_status_bar = true
+
+[presets.slot_2.drag_tools.left]
+drag_tool = "pen"
+shift_drag_tool = "line"
+ctrl_drag_tool = "rect"
+ctrl_shift_drag_tool = "arrow"
+tab_drag_tool = "ellipse"
+
+[presets.slot_4.tool_settings]
+eraser_size = 12.0
+
+[presets.slot_3.tool_settings.blur]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
+
+[presets.slot_4.tool_settings.pen]
+color = [
+    36,
+    31,
+    49,
+]
+size = 5.602685587853818
+
+[presets.slot_3.tool_settings.marker]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
+
+[presets.slot_4.tool_settings.line]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
+
+[presets.slot_4.tool_settings.rect]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
+
 [ui.toolbar.mode_overrides.advanced]
+
+[presets.slot_1.drag_tools.middle]
+drag_tool = "default"
+shift_drag_tool = "default"
+ctrl_drag_tool = "default"
+ctrl_shift_drag_tool = "default"
+tab_drag_tool = "default"
+
+[presets.slot_4.tool_settings.ellipse]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
+
+[presets.slot_3.tool_settings.step_marker]
+color = [
+    255,
+    0,
+    0,
+]
+size = 19.2
+
+[presets.slot_4.tool_settings.arrow]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
+
+[presets.slot_5]
+tool = "pen"
+color = [
+    36,
+    31,
+    49,
+]
+size = 5.602685587853818
+eraser_kind = "Circle"
+eraser_mode = "stroke"
+marker_opacity = 0.32
+fill_enabled = false
+font_size = 32.0
+text_background_enabled = false
+arrow_length = 20.0
+arrow_angle = 30.0
+arrow_head_at_end = true
+polygon_sides = 5
+show_status_bar = true
+
+[presets.slot_2.drag_tools.right]
+drag_tool = "default"
+shift_drag_tool = "default"
+ctrl_drag_tool = "default"
+ctrl_shift_drag_tool = "default"
+tab_drag_tool = "default"
+
+[presets.slot_5.tool_settings]
+eraser_size = 12.0
+
+[presets.slot_4.tool_settings.blur]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
+
+[presets.slot_5.tool_settings.pen]
+color = [
+    36,
+    31,
+    49,
+]
+size = 5.602685587853818
+
+[presets.slot_3.drag_tools.left]
+drag_tool = "pen"
+shift_drag_tool = "line"
+ctrl_drag_tool = "rect"
+ctrl_shift_drag_tool = "arrow"
+tab_drag_tool = "ellipse"
+
+[presets.slot_5.tool_settings.line]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
+
+[presets.slot_4.tool_settings.marker]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
+
+[presets.slot_5.tool_settings.rect]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
+
+[presets.slot_2.drag_tools.middle]
+drag_tool = "default"
+shift_drag_tool = "default"
+ctrl_drag_tool = "default"
+ctrl_shift_drag_tool = "default"
+tab_drag_tool = "default"
+
+[presets.slot_5.tool_settings.ellipse]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
+
+[presets.slot_4.tool_settings.step_marker]
+color = [
+    255,
+    0,
+    0,
+]
+size = 19.2
+
+[presets.slot_5.tool_settings.arrow]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
+
+[presets.slot_3.drag_tools.right]
+drag_tool = "default"
+shift_drag_tool = "default"
+ctrl_drag_tool = "default"
+ctrl_shift_drag_tool = "default"
+tab_drag_tool = "default"
+
+[presets.slot_5.tool_settings.blur]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
+
+[presets.slot_4.drag_tools.left]
+drag_tool = "pen"
+shift_drag_tool = "line"
+ctrl_drag_tool = "rect"
+ctrl_shift_drag_tool = "arrow"
+tab_drag_tool = "ellipse"
+
+[presets.slot_5.tool_settings.marker]
+color = [
+    255,
+    0,
+    0,
+]
+size = 3.0
+
+[presets.slot_3.drag_tools.middle]
+drag_tool = "default"
+shift_drag_tool = "default"
+ctrl_drag_tool = "default"
+ctrl_shift_drag_tool = "default"
+tab_drag_tool = "default"
+
+[presets.slot_5.tool_settings.step_marker]
+color = [
+    255,
+    0,
+    0,
+]
+size = 19.2
+
+[presets.slot_4.drag_tools.right]
+drag_tool = "default"
+shift_drag_tool = "default"
+ctrl_drag_tool = "default"
+ctrl_shift_drag_tool = "default"
+tab_drag_tool = "default"
+
+[presets.slot_5.drag_tools.left]
+drag_tool = "pen"
+shift_drag_tool = "line"
+ctrl_drag_tool = "rect"
+ctrl_shift_drag_tool = "arrow"
+tab_drag_tool = "ellipse"
+
+[presets.slot_4.drag_tools.middle]
+drag_tool = "default"
+shift_drag_tool = "default"
+ctrl_drag_tool = "default"
+ctrl_shift_drag_tool = "default"
+tab_drag_tool = "default"
+
+[presets.slot_5.drag_tools.right]
+drag_tool = "default"
+shift_drag_tool = "default"
+ctrl_drag_tool = "default"
+ctrl_shift_drag_tool = "default"
+tab_drag_tool = "default"
+
+[presets.slot_5.drag_tools.middle]
+drag_tool = "default"
+shift_drag_tool = "default"
+ctrl_drag_tool = "default"
+ctrl_shift_drag_tool = "default"
+tab_drag_tool = "default"
 
 [ui.toolbar.items]
 hidden = ["top.utility.screenshot"]
