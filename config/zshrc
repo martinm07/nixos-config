@@ -30,6 +30,7 @@ fi
 
 PS1="%F{#e2f9e0}[%* - %F{#6a7569}%D%F{#e2f9e0}] %B%F{$NIX_PATH_COLOR}%~%b %% %f"
 
+export SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt
 export PATH="$HOME/.local/bin:$PATH"
 
 alias nix-shell='nix-shell --command "exec zsh"'
